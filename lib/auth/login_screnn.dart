@@ -8,6 +8,7 @@ import 'package:thai_lottery/model/loginModel.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
+import 'package:thai_lottery/utility/requad_box.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -165,24 +166,30 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  Map<String, dynamic> data = await networkHtttp.login(
-                      phoneController.text, passwordController.text);
-                  loginModel = LoginModel.fromJson(data);
-                  if (loginModel.status == true) {
-                    print("login");
-                    pref.setString(
-                        "username", loginModel.data!.name.toString());
-                    pref.setString("email", loginModel.data!.email.toString());
-                    pref.setString(
-                        "balance", loginModel.data!.balance.toString());
-                    pref.setString(
-                        "phone", loginModel.data!.mobileNo.toString());
+                  if (phoneController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    alert_success().alertSuccess(context);
+                  } else {
+                    Map<String, dynamic> data = await networkHtttp.login(
+                        phoneController.text, passwordController.text);
+                    loginModel = LoginModel.fromJson(data);
+                    if (loginModel.status == true) {
+                      print("login");
+                      pref.setString(
+                          "username", loginModel.data!.name.toString());
+                      pref.setString(
+                          "email", loginModel.data!.email.toString());
+                      pref.setString("token", loginModel.token.toString());
+                      pref.setString(
+                          "balance", loginModel.data!.balance.toString());
+                      pref.setString(
+                          "phone", loginModel.data!.mobileNo.toString());
 
-
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
-                    passwordController.clear();
-                    phoneController.clear();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
+                      passwordController.clear();
+                      phoneController.clear();
+                    }
                   }
                 },
                 child: Container(

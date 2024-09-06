@@ -6,6 +6,8 @@ import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../utility/requad_box.dart';
+
 class DepositeScreen extends StatefulWidget {
   const DepositeScreen({super.key});
 
@@ -59,6 +61,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
                     borderRadius: BorderRadius.circular(20)),
                 child: TextFormField(
                   controller: amountController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
 
@@ -162,9 +165,14 @@ class _DepositeScreenState extends State<DepositeScreen> {
               SizedBox(height: 50,),
               GestureDetector(
                 onTap: ()async{
+                  if(amountController.text.isEmpty || UTRController.text.isEmpty){
+                    alert_success().alertSuccess(context);
+                  }else{
                  await networkHtttp.deposit(amountController.text, UTRController.text);
+                 amountController.clear();
+                 UTRController.clear();
                   // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginScreen()));
-                },
+                }},
                 child: Container(
                   height: 40,
                   margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20),

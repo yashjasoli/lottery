@@ -15,6 +15,7 @@ String userName = '';
 String email = '';
 String balance = '';
 String phoneNumber = '';
+String token = '';
 
 void main() {
   runApp(const MyApp());

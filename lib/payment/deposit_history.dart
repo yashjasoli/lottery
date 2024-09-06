@@ -155,7 +155,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                                               Border.all(color: Colors.green)),
                                       child: Center(
                                         child: Text(
-                                          "COMPLATED",
+                                          depositHistoryModel.data![index].status!.toUpperCase(),
                                           style: TextStyle(
                                               color: primarycolor_cust,
                                               fontSize: 10,

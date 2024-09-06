@@ -45,6 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
     getuserData();
   }
 
+  @override
+  void dispose() {
+    _HomeScreenState();
+    webcontroller.clearCache();
+    // close the webview here
+    super.dispose();
+  }
+
   wenload(){
     webcontroller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -66,6 +74,7 @@ getuserData()async {
   phoneNumber = await pref.getString("phone", "");
   balance = await pref.getString("balance", "");
   email = await pref.getString("email", "");
+  token = await pref.getString("token", "");
   setState(() {});
 }
   final pages = [

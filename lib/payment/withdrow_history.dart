@@ -64,7 +64,7 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
                       margin: const EdgeInsets.only(top: 8),
                       child: Column(
                         children: [
-                          Row(
+                          /*Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text("Gateway",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 10,color: primarycolor_cust),),
@@ -76,7 +76,7 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
                             height: 1,
                             color: Colors.white,
                           ),
-                          SizedBox(height: 15,),
+                          SizedBox(height: 15,),*/
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -104,7 +104,7 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
                                     border: Border.all(color: Colors.green)
                                 ),
                                 child: Center(
-                                  child: Text("COMPLATED", style: TextStyle(color: primarycolor_cust,fontSize: 10,fontWeight: FontWeight.w400),),
+                                  child: Text(depositHistoryModel.data![index].status!.toUpperCase(), style: TextStyle(color: primarycolor_cust,fontSize: 10,fontWeight: FontWeight.w400),),
                                 ),
                               )
                             ],

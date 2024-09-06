@@ -9,6 +9,7 @@ import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
+import 'package:thai_lottery/utility/requad_box.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,7 +20,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   NetworkHtttp networkHtttp = NetworkHtttp();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -27,7 +27,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   late LoginModel loginModel;
   SessionManager pref = SessionManager();
-
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +135,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: BoxDecoration(
                         color: dark_grey_background_cust,
                         borderRadius: BorderRadius.circular(20)),
-                    child:  Container(
-                     // width: 400,
-                    //  height: 60,
+                    child: Container(
+                      // width: 400,
+                      //  height: 60,
                       child: CountryCodePicker(
                         onChanged: print,
                         hideMainText: true,
@@ -258,24 +257,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {
-          Map<String, dynamic> data = await networkHtttp.register(
-              emailController.text, passwordController.text,nameController.text,phoneController.text);
-          loginModel = LoginModel.fromJson(data);
-          if (loginModel.status == true) {
-            print("login");
-            pref.setString(
-                "username", loginModel.data!.name.toString());
-            pref.setString("email", loginModel.data!.email.toString());
-            pref.setString(
-                "balance", loginModel.data!.balance.toString());
-            pref.setString(
-                "phone", loginModel.data!.mobileNo.toString());
+          if (phoneController.text.isEmpty ||
+              passwordController.text.isEmpty ||
+              nameController.text.isEmpty ||
+              phoneController.text.isEmpty) {
+            alert_success().alertSuccess(context);
+          } else {
+            Map<String, dynamic> data = await networkHtttp.register(
+                emailController.text,
+                passwordController.text,
+                nameController.text,
+                phoneController.text);
+            loginModel = LoginModel.fromJson(data);
+            if (loginModel.status == true) {
+              print("login");
+              pref.setString("username", loginModel.data!.name.toString());
+              pref.setString("email", loginModel.data!.email.toString());
+              pref.setString("balance", loginModel.data!.balance.toString());
+              pref.setString("phone", loginModel.data!.mobileNo.toString());
 
-
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => HomeScreen()));
-            passwordController.clear();
-            phoneController.clear();
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+              passwordController.clear();
+              phoneController.clear();
+            }
           }
         },
         child: Container(

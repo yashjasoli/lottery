@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
+import 'package:thai_lottery/utility/network_http.dart';
+
+import '../utility/requad_box.dart';
 
 class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});
@@ -12,7 +16,10 @@ class WithdrawScreen extends StatefulWidget {
 }
 
 class _WithdrawScreenState extends State<WithdrawScreen> {
+  NetworkHtttp networkHtttp = NetworkHtttp();
+  TextEditingController UTRController = TextEditingController();
   TextEditingController amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +45,9 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           color: textcolor_cust2)),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 50,
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -46,14 +55,20 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                     color: seconderycolor_cust.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20)),
                 child: TextFormField(
+                  controller: UTRController,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: "Enter Your PromptPay / UPI ID",
-                      hintStyle: TextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: primarycolor_cust),
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: primarycolor_cust),
                       border: InputBorder.none),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 50,
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -62,19 +77,24 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                     borderRadius: BorderRadius.circular(20)),
                 child: TextFormField(
                   controller: amountController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-
                       hintText: "Enter Amount",
-                      hintStyle: TextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: primarycolor_cust),
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: primarycolor_cust),
                       border: InputBorder.none),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       amountController.text = "200";
                       setState(() {});
                     },
@@ -83,21 +103,29 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       width: 60,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: toolbarcolor_lang,width: 2),
-                          color: amountController.text != "200" ? Colors.white : toolbarcolor_lang
-                      ),
+                          border:
+                              Border.all(color: toolbarcolor_lang, width: 2),
+                          color: amountController.text != "200"
+                              ? Colors.white
+                              : toolbarcolor_lang),
                       child: Center(
-                        child: Text("200",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: amountController.text == "200" ? Colors.black : seconderycolor_cust
-                        ),),
+                        child: Text(
+                          "200",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: amountController.text == "200"
+                                  ? Colors.black
+                                  : seconderycolor_cust),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       amountController.text = "500";
                       setState(() {});
                     },
@@ -106,21 +134,29 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       width: 60,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: toolbarcolor_lang,width: 2),
-                          color: amountController.text != "500" ? Colors.white : toolbarcolor_lang
-                      ),
+                          border:
+                              Border.all(color: toolbarcolor_lang, width: 2),
+                          color: amountController.text != "500"
+                              ? Colors.white
+                              : toolbarcolor_lang),
                       child: Center(
-                        child: Text("500",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: amountController.text == "500" ? Colors.black : seconderycolor_cust
-                        ),),
+                        child: Text(
+                          "500",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: amountController.text == "500"
+                                  ? Colors.black
+                                  : seconderycolor_cust),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       amountController.text = "1000";
                       setState(() {});
                     },
@@ -129,43 +165,57 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       width: 60,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: toolbarcolor_lang,width: 2),
-                          color: amountController.text != "1000" ? Colors.white : toolbarcolor_lang
-                      ),
+                          border:
+                              Border.all(color: toolbarcolor_lang, width: 2),
+                          color: amountController.text != "1000"
+                              ? Colors.white
+                              : toolbarcolor_lang),
                       child: Center(
-                        child: Text("1000",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: amountController.text == "1000" ? Colors.black : seconderycolor_cust
-                        ),),
+                        child: Text(
+                          "1000",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: amountController.text == "1000"
+                                  ? Colors.black
+                                  : seconderycolor_cust),
+                        ),
                       ),
                     ),
                   ),
-
                 ],
               ),
-
-
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar:GestureDetector(
-        onTap: (){
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginScreen()));
+      bottomNavigationBar: GestureDetector(
+        onTap: () async {
+          if (amountController.text.isEmpty || UTRController.text.isEmpty) {
+            alert_success().alertSuccess(context);
+          } else {
+            await networkHtttp.withdraw(
+                amountController.text, UTRController.text);
+            amountController.clear();
+            UTRController.clear();
+          }
         },
         child: Container(
           height: 40,
-          margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
               color: primarycolor_cust,
-              borderRadius: BorderRadius.circular(10)
-          ),
+              borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Text(
               "DEPOSITE NOW",
-              style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 18),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18),
             ),
           ),
         ),
