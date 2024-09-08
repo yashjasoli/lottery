@@ -4,7 +4,6 @@ import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
-import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
 class PersonalInformation extends StatefulWidget {
@@ -18,26 +17,26 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController nameController = TextEditingController(text: userName);
   TextEditingController emailController = TextEditingController(text: email);
   TextEditingController phoneController = TextEditingController(text: phoneNumber);
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBars(),
-      drawer: drower(),
+      appBar: const AppBars(),
+      drawer: const drower(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 50,),
+              const SizedBox(height: 50,),
               Center(
-                child: Text('Personal Information',style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
+                child: Text('Personal Information',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
               ),
-              SizedBox(height: 30,),
-              Text("Your Name",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
-              SizedBox(height: 8,),
+              const SizedBox(height: 30,),
+              const Text("Your Name",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+              const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
                   height: 55,
@@ -47,15 +46,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       color: toolbarcolor_lang
                   ),
                   child: ListTile(
-                    leading: Icon(Icons.person,color: textcolor_cust2,),
+                    leading: const Icon(Icons.person,color: textcolor_cust2,),
                     title: TextFormField(
                       controller: nameController,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: greycolor_cust,
                         fontWeight: FontWeight.w500
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
 
                       ),
@@ -63,9 +62,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Text("Phone Number",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
-              SizedBox(height: 8,),
+              const SizedBox(height: 15,),
+              const Text("Phone Number",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+              const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
                   height: 55,
@@ -75,15 +74,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       color: toolbarcolor_lang
                   ),
                   child: ListTile(
-                    leading: Icon(Icons.phone_android,color: textcolor_cust2,),
+                    leading: const Icon(Icons.phone_android,color: textcolor_cust2,),
                     title: TextFormField(
                       controller: phoneController,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           color: greycolor_cust,
                           fontWeight: FontWeight.w500
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
 
                       ),
@@ -91,9 +90,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Text("Email Address",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
-              SizedBox(height: 8,),
+              const SizedBox(height: 15,),
+              const Text("Email Address",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+              const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
                   height: 55,
@@ -103,15 +102,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       color: toolbarcolor_lang
                   ),
                   child: ListTile(
-                    leading: Icon(Icons.alternate_email,color: textcolor_cust2,),
+                    leading: const Icon(Icons.alternate_email,color: textcolor_cust2,),
                     title: TextFormField(
                       controller: emailController,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           color: greycolor_cust,
                           fontWeight: FontWeight.w500
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
 
                       ),
@@ -119,8 +118,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Text("If you want to change your phone and email address, please contact with support.",style: TextStyle(
+              const SizedBox(height: 15,),
+              const Text("If you want to change your phone and email address, please contact with support.",style: TextStyle(
                 color: greycolor_cust,
                 fontWeight: FontWeight.w400,
                 fontSize: 10
@@ -135,12 +134,12 @@ class _PersonalInformationState extends State<PersonalInformation> {
        },
        child: Container(
          height: 40,
-         margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+         margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
          decoration: BoxDecoration(
              color: primarycolor_cust,
              borderRadius: BorderRadius.circular(10)
          ),
-         child: Center(
+         child: const Center(
            child: Text(
              "Save Changes",
              style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 18),

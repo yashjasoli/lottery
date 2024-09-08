@@ -1,28 +1,57 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thai_lottery/utility/app_bar.dart';
+import 'package:lottie/lottie.dart';
 import 'package:thai_lottery/utility/colors.dart';
-import 'package:thai_lottery/utility/dwers.dart';
+import 'package:thai_lottery/utility/network_http.dart';
+
+import '../model/lottery_details_model.dart';
+import '../model/ticket_number_model.dart';
+import '../utility/progressdialog_custom.dart';
 
 class TicketGenerateScreen extends StatefulWidget {
+  String id;
+
+  TicketGenerateScreen({super.key, required this.id});
+
   @override
-  _TicketGenerateScreenState createState() => _TicketGenerateScreenState();
+  State<TicketGenerateScreen> createState() => _TicketGenerateScreenState();
 }
 
 class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   late DateTime nextDrawDate;
   late Duration remainingTime;
   late Timer timer;
+  NetworkHttp networkHtttp = NetworkHttp();
+  late LotteryDetailsModel lotteryDetailsModel;
+  bool _isLoading = true;
+  late AllTicketModel allTicketModel;
+  List<String> ticketNumber = [];
+  List<String> tickets = List.generate(1, (index) => "");
 
   @override
   void initState() {
     super.initState();
-    nextDrawDate = DateTime(2024, 9, 12, 0, 0, 0); // Set the date of the next draw
-    remainingTime = nextDrawDate.difference(DateTime.now());
 
+    getData();
     // Start the timer that updates every second
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  }
+
+  getData() async {
+    Map<String, dynamic> ref = await networkHtttp.lotteryDetails(widget.id);
+    lotteryDetailsModel = LotteryDetailsModel.fromJson(ref);
+    _isLoading = false;
+
+    print(lotteryDetailsModel.data!.drawDate!.split("-")[0]);
+    nextDrawDate = DateTime(
+        int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[0]),
+        int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[1]),
+        int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[2]),
+        0,
+        0,
+        0); // Set the date of the next draw
+    remainingTime = nextDrawDate.difference(DateTime.now());
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         remainingTime = nextDrawDate.difference(DateTime.now());
         if (remainingTime.isNegative) {
@@ -30,6 +59,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
         }
       });
     });
+    setState(() {});
   }
 
   @override
@@ -41,33 +71,37 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars(),
-      drawer: drower(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Lottery Info
-              _buildLotteryInfo(),
-              SizedBox(height: 20),
-              // Next Draw Info
-              _buildNextDrawInfo(),
-              SizedBox(height: 20),
-              // Ticket Generation Section
-              _buildTicketGenerationSection(),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: _buildBuyNowButton(),
+      // appBar: AppBars(),
+      // drawer: drower(),
+      body: _isLoading == true
+          ? progressdialog_custom()
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Lottery Info
+                    _buildLotteryInfo(),
+                    const SizedBox(height: 20),
+                    // Next Draw Info
+                    _buildNextDrawInfo(),
+                    const SizedBox(height: 20),
+                    // Ticket Generation Section
+                    _buildTicketGenerationSection(),
+                    const SizedBox(height: 20),
+                    _buildBuyNowButton(),
+                    const SizedBox(height: 50),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 
   Widget _buildLotteryInfo() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.green,
         borderRadius: BorderRadius.circular(8),
@@ -82,21 +116,44 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                 Text(
                   "  THAI LOTTERY  ",
                   style: GoogleFonts.aclonica(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 24,
                           color: Colors.white)),
                 ),
-                _buildCircleLine(),
+                Flexible(
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 2,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text("THB", style: _whiteText(12)),
                 Text("15,000,000", style: _whiteText(20)),
-                VerticalDivider(color: Colors.white, thickness: 2),
+                Container(
+                  width: 2,
+                  height: 40,
+                  color: Colors.white,
+                ),
                 Column(
                   children: [
                     Text("GUARANTEED WINNERS",
@@ -106,7 +163,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -130,24 +187,54 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           Text(
             "NEXT DRAW",
             style: GoogleFonts.aclonica(
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             "Friday, 12 July 2024",
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildCountdown("$days", "DAYS"),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text(
+                  ":",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800),
+                ),
+              ),
               _buildCountdown("$hours", "HOURS"),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text(
+                  ":",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800),
+                ),
+              ),
               _buildCountdown("$minutes", "MINUTES"),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text(
+                  ":",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800),
+                ),
+              ),
               _buildCountdown("$seconds", "SECONDS"),
             ],
           ),
@@ -167,19 +254,17 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTicketHeader(),
-          SizedBox(height: 16),
-          Divider(color: Colors.white),
+          const SizedBox(height: 16),
+          const Divider(color: Colors.white),
           SizedBox(
             height: 200,
             child: _buildTicketList(),
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             "1 Draw With 2 Tickets: 2 x 50\nTotal Amount: 100",
             style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 12),
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
           ),
         ],
       ),
@@ -187,16 +272,35 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   }
 
   Widget _buildBuyNowButton() {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(10)),
-      child: Center(
-        child: Text(
-          "Buy Now",
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+    return GestureDetector(
+      onTap: ticketNumber.isEmpty
+          ? null
+          : () async {
+              Map<String, dynamic> ref =
+                  await networkHtttp.buyLottery(widget.id, tickets);
+              print(ref['status']);
+              if (ref['status'] == false) {
+                showClecel();
+              } else {
+                showSuccess();
+              }
+            },
+      child: Container(
+        height: 50,
+        margin: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: ticketNumber.isEmpty
+              ? Colors.green
+                  .withOpacity(0.5) // Grayed-out color when tickets is empty.
+              : Colors.green, // Full color when tickets is not empty.
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const Center(
+          child: Text(
+            "Buy Now", // Correct conditional text display.
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+          ),
         ),
       ),
     );
@@ -215,7 +319,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           Container(
             height: 10,
             width: 10,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
             ),
@@ -226,7 +330,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   }
 
   Widget _buildTicketHeader() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
@@ -235,73 +339,158 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
     );
   }
 
+  // Initialize with 3 empty tickets.
+
   Widget _buildTicketList() {
-    return ListView.builder(
-      itemCount: 4,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (BuildContext context, int index) {
-        return _buildTicketCard();
-      },
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: tickets.length + 1,
+            // Add one more item for the "Add Ticket" button.
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              if (index < tickets.length) {
+                // Render the ticket card if it's within the list length.
+                return _buildTicketCard(index);
+              } else {
+                // Render the "Add Ticket" button if it's the last item.
+                return _buildAddTicketButton();
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildTicketCard() {
+  Widget _buildTicketCard(int index) {
     return Container(
       width: 250,
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Color(0xff544989),
+        color: const Color(0xff544989),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          Text("Your Ticket Number",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12)),
-          SizedBox(height: 8),
-          Divider(color: Colors.white),
-          SizedBox(height: 8),
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-                color: primarycolor_cust,
-                borderRadius: BorderRadius.circular(6)),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 3),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(6)),
-              child: Center(
-                child: Text(
-                  "331426380129",
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w600),
-                ),
+          Align(
+            alignment: Alignment.topRight,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  tickets.removeAt(index);
+                  ticketNumber.removeAt(index);
+                });
+                print(index);
+              },
+              child: const Icon(
+                Icons.delete,
+                size: 20,
+                color: Colors.red,
               ),
             ),
           ),
-          SizedBox(height: 16),
-          Container(
-            height: 40,
-            decoration: BoxDecoration(
-                color: primarycolor_cust,
-                borderRadius: BorderRadius.circular(10)),
-            child: Center(
-              child: Text(
-                "GENERATE",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                const Text("Your Ticket Number",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12)),
+                const SizedBox(height: 8),
+                const Divider(color: Colors.white),
+                const SizedBox(height: 8),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: primarycolor_cust,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 3),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Center(
+                      child: Text(
+                        tickets[index],
+                        // Use the ticket number for the current index.
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () async {
+                    Map<String, dynamic> ref = await networkHtttp
+                        .ticketNumber(); // Call API for the current index.
+                    allTicketModel = AllTicketModel.fromJson(ref);
+                    // Update the ticket number for the current index.
+
+                    setState(() {
+                      tickets[index] = allTicketModel.data.toString();
+                    });
+                    ticketNumber.add(tickets.toString());
+
+                    print(tickets[
+                        index]); // Rebuild the widget to reflect changes.
+                  },
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: primarycolor_cust,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                      child: Text(
+                        "GENERATE",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+              ],
             ),
-          ),
-          SizedBox(height: 10),
+          )
         ],
+      ),
+    );
+  }
+
+  Widget _buildAddTicketButton() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          tickets.add(""); // Add an empty ticket to the list.
+        });
+      },
+      child: Container(
+        width: 250,
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.green, // Choose any color for the "Add Ticket" button.
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const Center(
+          child: Text(
+            "ADD TICKET",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -317,17 +506,17 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           child: Center(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(color: Colors.white, fontSize: 12),
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
       ],
     );
@@ -338,6 +527,135 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       color: Colors.white,
       fontWeight: fontWeight,
       fontSize: size,
+    );
+  }
+
+  showSuccess() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+
+          // title: Center(child: Text('Welcome')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.network(
+                  "https://lottie.host/d4c8c6b9-20c7-4727-9557-095cbe00baee/7yFUw1WtVB.json",
+                  height: 200),
+              const Text(
+                "Success",
+                style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "You have successfully purchased 2 Tickets",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 10),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: primarycolor_cust,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Okay",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  showClecel() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+
+          // title: Center(child: Text('Welcome')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.network(
+                  "https://lottie.host/b0cd5755-f656-42de-9aa3-2540bc731ea9/6bZ8ikv3ga.json",
+                  height: 200),
+              const Text(
+                "Insufficient \nBalance",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "Purchasing failed please deposit money",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 10),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: primarycolor_cust,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Go To Deposit",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

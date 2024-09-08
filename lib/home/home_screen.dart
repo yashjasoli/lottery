@@ -9,15 +9,17 @@ import 'package:thai_lottery/faq/faq_screen.dart';
 import 'package:thai_lottery/home/create_ticket.dart';
 import 'package:thai_lottery/home/draw_results.dart';
 import 'package:thai_lottery/home/order.dart';
-import 'package:thai_lottery/main.dart';
+import 'package:thai_lottery/model/all_lottery_model.dart';
 import 'package:thai_lottery/payment/deposite_screen.dart';
 import 'package:thai_lottery/payment/withdraw_screen.dart';
-import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
-import 'package:thai_lottery/utility/shared_preferences.dart';
+import 'package:thai_lottery/utility/network_http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../main.dart';
+import '../utility/progressdialog_custom.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,27 +35,32 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
   late int thumselected = 0;
   late PersistentTabController _controller;
-  SessionManager pref = SessionManager();
+
   late final WebViewController webcontroller;
+  NetworkHttp networkHtttp = NetworkHttp();
+  late AllLottery allLottery;
   String url = 'https://www.google.co.in/';
+  bool _isLoading = true;
+
   @override
   void initState() {
-    super.initState();
+    print("---------------");
+    getData();
+
     _controller = PersistentTabController(initialIndex: 0);
     pageController = PageController(initialPage: selectedIndex);
     wenload();
-    getuserData();
+    super.initState();
   }
 
-  @override
-  void dispose() {
-    _HomeScreenState();
-    webcontroller.clearCache();
-    // close the webview here
-    super.dispose();
+  getData() async {
+    Map<String, dynamic> ref = await networkHtttp.allLottery();
+    allLottery = AllLottery.fromJson(ref);
+    _isLoading = false;
+    setState(() {});
   }
 
-  wenload(){
+  wenload() {
     webcontroller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
@@ -69,14 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ..loadRequest(Uri.parse(url));
   }
 
-getuserData()async {
-  userName = await pref.getString("username", "");
-  phoneNumber = await pref.getString("phone", "");
-  balance = await pref.getString("balance", "");
-  email = await pref.getString("email", "");
-  token = await pref.getString("token", "");
-  setState(() {});
-}
   final pages = [
     benarImage,
     benarImage,
@@ -92,72 +91,123 @@ getuserData()async {
       ),
       child: Scaffold(
         backgroundColor: Colors.red,
-        appBar: AppBars(),
-        drawer: drower(),
-        body: PersistentTabView(
-          context,
-          controller: _controller,
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-          handleAndroidBackButtonPress: true,
-          resizeToAvoidBottomInset: false,
-          stateManagement: false,
-          hideNavigationBarWhenKeyboardAppears: true,
-          popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
-          hideOnScrollSettings: HideOnScrollSettings(
-            hideNavBarOnScroll: false,
-            // scrollControllers: _scrollControllers,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Image.asset(
+            ic_logo,
+            scale: 4,
           ),
-          margin: EdgeInsets.symmetric(horizontal: 1),
-          decoration: NavBarDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-          padding: const EdgeInsets.only(top: 0, bottom: 8),
-          // onWillPop: (final context) async {
-          //   await showDialog(
-          //     context: context ?? this.context,
-          //     useSafeArea: true,
-          //     builder: (final context) => Container(
-          //       height: 50,
-          //       width: 50,
-          //       color: Colors.white,
-          //       child: ElevatedButton(
-          //         child: const Text("Close"),
-          //         onPressed: () {
-          //           Navigator.pop(context);
-          //         },
-          //       ),
-          //     ),
-          //   );
-          //   return false;
-          // },
-          selectedTabScreenContext: (final context) {
-            //  testContext = context;
-          },
-          backgroundColor: Color(0xffEAF7FF),
-          animationSettings: const NavBarAnimationSettings(
-            navBarItemAnimation: ItemAnimationSettings(
-              // Navigation Bar's items animation properties.
-              duration: Duration(milliseconds: 400),
-              curve: Curves.ease,
-            ),
-            screenTransitionAnimation: ScreenTransitionAnimationSettings(
-              // Screen transition animation on change of selected tab.
-              animateTabTransition: false,
-              duration: Duration(milliseconds: 300),
-              screenTransitionAnimationType:
-                  ScreenTransitionAnimationType.fadeIn,
-            ),
-            onNavBarHideAnimation: OnHideAnimationSettings(
-              duration: Duration(milliseconds: 100),
-              curve: Curves.bounceInOut,
-            ),
+          centerTitle: true,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: Image.asset(
+                  ic_drower,
+                  scale: 4,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
           ),
-          confineToSafeArea: false,
-          navBarHeight: kBottomNavigationBarHeight,
-          navBarStyle:
-              NavBarStyle.style3, // Choose the nav bar style with this property
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10, top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text(
+                    "Wallet funds",
+                    style: TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.w600,
+                      color: greycolor_cust,
+                    ),
+                  ),
+                  Text(
+                    "THB $balance",
+                    style: const TextStyle(
+                      color: textcolor_cust,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
+        drawer: const drower(),
+        body: _isLoading == true
+            ? progressdialog_custom()
+            : PersistentTabView(
+                context,
+                controller: _controller,
+                screens: _buildScreens(),
+                items: _navBarsItems(),
+                handleAndroidBackButtonPress: true,
+                resizeToAvoidBottomInset: false,
+                stateManagement: false,
+                hideNavigationBarWhenKeyboardAppears: true,
+                popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
+                hideOnScrollSettings: const HideOnScrollSettings(
+                  hideNavBarOnScroll: false,
+                  // scrollControllers: _scrollControllers,
+                ),
+                margin: const EdgeInsets.symmetric(horizontal: 1),
+                decoration: const NavBarDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20))),
+                padding: const EdgeInsets.only(top: 0, bottom: 8),
+                // onWillPop: (final context) async {
+                //   await showDialog(
+                //     context: context ?? this.context,
+                //     useSafeArea: true,
+                //     builder: (final context) => Container(
+                //       height: 50,
+                //       width: 50,
+                //       color: Colors.white,
+                //       child: ElevatedButton(
+                //         child: const Text("Close"),
+                //         onPressed: () {
+                //           Navigator.pop(context);
+                //         },
+                //       ),
+                //     ),
+                //   );
+                //   return false;
+                // },
+                selectedTabScreenContext: (final context) {
+                  //  testContext = context;
+                },
+                backgroundColor: const Color(0xffEAF7FF),
+                animationSettings: const NavBarAnimationSettings(
+                  navBarItemAnimation: ItemAnimationSettings(
+                    // Navigation Bar's items animation properties.
+                    duration: Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  ),
+                  screenTransitionAnimation: ScreenTransitionAnimationSettings(
+                    // Screen transition animation on change of selected tab.
+                    animateTabTransition: false,
+                    duration: Duration(milliseconds: 300),
+                    screenTransitionAnimationType:
+                        ScreenTransitionAnimationType.fadeIn,
+                  ),
+                  onNavBarHideAnimation: OnHideAnimationSettings(
+                    duration: Duration(milliseconds: 100),
+                    curve: Curves.bounceInOut,
+                  ),
+                ),
+                confineToSafeArea: false,
+                navBarHeight: kBottomNavigationBarHeight,
+                navBarStyle: NavBarStyle
+                    .style3, // Choose the nav bar style with this property
+              ),
       ),
     );
   }
@@ -215,7 +265,7 @@ getuserData()async {
                       color: primarycolor_cust.withOpacity(0.7),
                       // Inactive color
                       activeColor: primarycolor_cust,
-                      size: Size.square(6.0),
+                      size: const Size.square(6.0),
                       activeSize: const Size(10.0, 10.0),
                       activeShape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)),
@@ -225,159 +275,177 @@ getuserData()async {
                 const SizedBox(
                   height: 12,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Container(
-                                    height: 2,
-                                    color: Colors.white,
-                                  )),
-                                  Container(
-                                    height: 10,
-                                    width: 10,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Text(
-                              "  THAI LOTTERY  ",
-                              style: GoogleFonts.aclonica(
-                                  textStyle: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                      color: Colors.white)),
-                            ),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 10,
-                                    width: 10,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 2,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          width: 80,
-                          height: 30,
+                SizedBox(
+                  height: 210,
+                  // width: 500,
+                  child: ListView.builder(
+                      itemCount: allLottery.data!.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, index) {
+                        return Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width * 0.97,
+                          margin:
+                              const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                           decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(20),
-                              border:
-                                  Border.all(color: Colors.white, width: 1)),
-                          child: Center(
-                            child: Text(
-                              "THB 80",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15),
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Flexible(
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              child: Container(
+                                            height: 2,
+                                            color: Colors.white,
+                                          )),
+                                          Container(
+                                            height: 10,
+                                            width: 10,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      "  THAI LOTTERY  ",
+                                      style: GoogleFonts.aclonica(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 18,
+                                              color: Colors.white)),
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 10,
+                                            width: 10,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.white),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              height: 2,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  width: 80,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                          color: Colors.white, width: 1)),
+                                  child: const Center(
+                                    child: Text(
+                                      "THB 80",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Text(
+                                  "THB 15,000,000",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        winding();
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 30,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              bottomRight: Radius.circular(20)),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            "PRIZES",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TicketGenerateScreen(
+                                                      id: allLottery
+                                                          .data![index].sId
+                                                          .toString(),
+                                                    )));
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 30,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              bottomLeft: Radius.circular(20)),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            "BUY NOW",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "THB 15,000,000",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                winding();
-                              },
-                              child: Container(
-                                width: 120,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "PRIZES",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        TicketGenerateScreen()));
-                              },
-                              child: Container(
-                                width: 120,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20)),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "BUY NOW",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
+                        );
+                      }),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(8),
@@ -399,7 +467,7 @@ getuserData()async {
                                   Container(
                                     height: 10,
                                     width: 10,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.white),
                                   )
@@ -408,7 +476,7 @@ getuserData()async {
                             ),
                             Text("  LATEST DRAW  ",
                                 style: GoogleFonts.aclonica(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 18),
@@ -419,7 +487,7 @@ getuserData()async {
                                   Container(
                                     height: 10,
                                     width: 10,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.white),
                                   ),
@@ -434,10 +502,10 @@ getuserData()async {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Center(
+                        const Center(
                           child: Text(
                             "Feiday, 5 July 2024",
                             style: TextStyle(
@@ -446,7 +514,7 @@ getuserData()async {
                                 fontSize: 15),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -455,7 +523,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -465,7 +533,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "33",
                                     style: TextStyle(
@@ -479,7 +547,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -489,7 +557,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "14",
                                     style: TextStyle(
@@ -503,7 +571,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -513,7 +581,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "26",
                                     style: TextStyle(
@@ -527,7 +595,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -537,7 +605,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "38",
                                     style: TextStyle(
@@ -551,7 +619,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -561,7 +629,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "01",
                                     style: TextStyle(
@@ -575,7 +643,7 @@ getuserData()async {
                             Container(
                               height: 40,
                               width: 40,
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               decoration: BoxDecoration(
                                 color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(5),
@@ -585,7 +653,7 @@ getuserData()async {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "29",
                                     style: TextStyle(
@@ -598,24 +666,24 @@ getuserData()async {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => DrawResuits()));
+                                builder: (context) => const DrawResuits()));
                             //winding();
                           },
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
                             decoration: BoxDecoration(
                                 color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(20),
                                 border:
                                     Border.all(color: Colors.white, width: 1)),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "VIEW FULL RESULTS",
                                 style: TextStyle(
@@ -630,7 +698,9 @@ getuserData()async {
                     ),
                   ),
                 ),
-                SizedBox(height: 60,)
+                const SizedBox(
+                  height: 60,
+                )
               ],
             ),
           ),
@@ -641,13 +711,16 @@ getuserData()async {
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(
-          icon: Image.asset(ic_home,scale: 3.5,),
+          icon: Image.asset(
+            ic_home,
+            scale: 3.5,
+          ),
           opacity: 0.7,
           activeColorPrimary: primarycolor_cust,
 
           inactiveColorPrimary: Colors.grey,
           //  scrollController: _scrollControllers.first,
-          routeAndNavigatorSettings: RouteAndNavigatorSettings(
+          routeAndNavigatorSettings: const RouteAndNavigatorSettings(
             initialRoute: "/",
             routes: {
               // "/first": (final context) => const MainScreen2(),
@@ -656,7 +729,10 @@ getuserData()async {
           ),
         ),
         PersistentBottomNavBarItem(
-          icon: Image.asset(ic_nev2,scale: 3.5,),
+          icon: Image.asset(
+            ic_nev2,
+            scale: 3.5,
+          ),
           activeColorPrimary: primarycolor_cust,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -667,12 +743,18 @@ getuserData()async {
           // activeColorSecondary: _getSecondaryItemColorForSpecificStyles(),
         ),
         PersistentBottomNavBarItem(
-          icon: Image.asset(ic_nev4,scale: 3.5,),
+          icon: Image.asset(
+            ic_nev4,
+            scale: 3.5,
+          ),
           activeColorPrimary: primarycolor_cust,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: Image.asset(ic_nev5,scale: 3.5,),
+          icon: Image.asset(
+            ic_nev5,
+            scale: 3.5,
+          ),
           activeColorPrimary: primarycolor_cust,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -680,7 +762,7 @@ getuserData()async {
 
   List<Widget> _buildScreens() => [
         homeView(),
-    OrderScreen(),
+        const OrderScreen(),
         Container(
           height: 50,
           width: 50,
@@ -688,8 +770,8 @@ getuserData()async {
             controller: webcontroller,
           ),
         ),
-    FaqScreen(),
-    payment(),
+        const FaqScreen(),
+        payment(),
         // MainScreen(
         //   menuScreenContext: widget.menuScreenContext,
         //   scrollController: _scrollControllers.first,
@@ -749,61 +831,63 @@ getuserData()async {
         // ),
       ];
 
-  payment(){
+  payment() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage(payment_background), fit: BoxFit.fill),
       ),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Center(
             child: Text(
               'Payment',
               style: GoogleFonts.aclonica(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
                       color: textcolor_cust2)),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Column(
             children: [
               GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DepositeScreen()));
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const DepositeScreen()));
                 },
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundColor: Color(0xffB2A3FF),
+                  backgroundColor: const Color(0xffB2A3FF),
                   child: Container(
                     height: 110,
                     width: 110,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: primarycolor_cust
-                    ),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: primarycolor_cust),
                     child: Center(
-                      child: Image.asset(ic_sendMonay,scale: 5,),
+                      child: Image.asset(
+                        ic_sendMonay,
+                        scale: 5,
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
                   'Deposite',
                   style: GoogleFonts.aclonica(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w400,
                           color: textcolor_cust2)),
@@ -811,39 +895,41 @@ getuserData()async {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
           Column(
             children: [
               GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> WithdrawScreen()));
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const WithdrawScreen()));
                 },
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundColor: Color(0xffCAFFE6),
+                  backgroundColor: const Color(0xffCAFFE6),
                   child: Container(
                     height: 110,
                     width: 110,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green
-                    ),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.green),
                     child: Center(
-                      child: Image.asset(ic_getMonay,scale: 5,),
+                      child: Image.asset(
+                        ic_getMonay,
+                        scale: 5,
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
                   'Withdraw',
                   style: GoogleFonts.aclonica(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w400,
                           color: Colors.green)),
@@ -874,11 +960,11 @@ getuserData()async {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 200,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -893,7 +979,7 @@ getuserData()async {
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "WINNINGS AMMOUNT",
                           style: TextStyle(
@@ -904,13 +990,13 @@ getuserData()async {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: dark_grey_background_cust,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Column(
+                      child: const Column(
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
@@ -1181,7 +1267,7 @@ getuserData()async {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             GestureDetector(
@@ -1194,7 +1280,7 @@ getuserData()async {
                     color: Colors.white,
                     border: Border.all(
                         color: primarycolor_cust.withOpacity(0.2), width: 2)),
-                child: Icon(
+                child: const Icon(
                   Icons.clear,
                   color: primarycolor_cust,
                 ),

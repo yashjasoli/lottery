@@ -20,34 +20,34 @@ class _LanguageScreenState extends State<LanguageScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 10, right: 10),
-          child: CircleAvatar(
-            backgroundColor: Color(0xffF1F6F9),
-            child: Icon(CupertinoIcons.back),
-          ),
-        ),
+        // leading: Padding(
+        //   padding: EdgeInsets.only(left: 10, right: 10),
+        //   child: CircleAvatar(
+        //     backgroundColor: Color(0xffF1F6F9),
+        //     child: Icon(CupertinoIcons.back),
+        //   ),
+        // ),
         elevation: 0,
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Text(
             "Language",
             style: GoogleFonts.breeSerif(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
                     color: font_color_cust)),
           ),
-          Text(
+          const Text(
             "Select your app language",
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff8B9199)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Row(
@@ -108,7 +108,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -172,16 +172,18 @@ class _LanguageScreenState extends State<LanguageScreen> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false);
         },
         child: Container(
           height: 50,
-          margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           decoration: BoxDecoration(
               color: primarycolor_cust,
               borderRadius: BorderRadius.circular(10)),
-          child: Center(
+          child: const Center(
             child: Text(
               "Next",
               style: TextStyle(

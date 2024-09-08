@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
-import 'package:thai_lottery/utility/dwers.dart';
+
+import '../model/all_ticket_model.dart';
+import '../utility/network_http.dart';
+import '../utility/progressdialog_custom.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -12,17 +14,35 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  allTicketModel _ticketModel = allTicketModel();
+  NetworkHttp networkHtttp = NetworkHttp();
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    Map<String, dynamic> data = await networkHtttp.pendingTicket();
+    _ticketModel = allTicketModel.fromJson(data);
+    _isLoading = false;
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: _isLoading == true
+          ? progressdialog_custom()
+          : SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 50,),
-            Text('Orders',style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
-            SizedBox(height: 10,),
+            const SizedBox(height: 50,),
+            Text('Orders',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
+            const SizedBox(height: 10,),
             ListView.builder(
-                itemCount: 8,
+                itemCount: _ticketModel.data!.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -39,7 +59,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "No.",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -47,28 +67,28 @@ class _OrderScreenState extends State<OrderScreen> {
                                     color: primarycolor_cust),
                               ),
                               Text(
-                                "1",
-                                style: TextStyle(
+                              "${index + 1}",
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 10,
                                     color: primarycolor_cust),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
                             height: 1,
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Lottery Name",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -76,28 +96,28 @@ class _OrderScreenState extends State<OrderScreen> {
                                     color: primarycolor_cust),
                               ),
                               Text(
-                                "Thai Lottery",
-                                style: TextStyle(
+                                _ticketModel.data![index].lotteryId!.name.toString(),
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 10,
                                     color: primarycolor_cust),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
                             height: 1,
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Tickets",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -105,28 +125,28 @@ class _OrderScreenState extends State<OrderScreen> {
                                     color: primarycolor_cust),
                               ),
                               Text(
-                                "8534760282",
-                                style: TextStyle(
+                                _ticketModel.data![index].ticketNumber.toString(),
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 10,
                                     color: primarycolor_cust),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
                             height: 1,
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Status",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
@@ -137,13 +157,13 @@ class _OrderScreenState extends State<OrderScreen> {
                                 height: 25,
                                 padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xffEDF7EE),
+                                    color: const Color(0xffEDF7EE),
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(color: Colors.green)),
                                 child: Center(
                                   child: Text(
-                                    "COMPLATED",
-                                    style: TextStyle(
+                                    _ticketModel.data![index].status!.toUpperCase(),
+                                    style: const TextStyle(
                                         color: primarycolor_cust,
                                         fontSize: 10,
                                         fontWeight: FontWeight.w400),
@@ -157,7 +177,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                   );
                 }),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
           ],
         ),
       ),

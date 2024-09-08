@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thai_lottery/auth/login_screnn.dart';
-import 'package:thai_lottery/faq/faq_screen.dart';
 import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/my_account/my_account.dart';
 import 'package:thai_lottery/payment/deposit_history.dart';
-import 'package:thai_lottery/payment/payment_screen.dart';
 import 'package:thai_lottery/payment/withdrow_history.dart';
 import 'package:thai_lottery/ticket_history.dart';
 import 'package:thai_lottery/utility/colors.dart';
@@ -38,10 +36,10 @@ class drower extends StatelessWidget {
                       const DividerThemeData(color: Colors.transparent),
                 ),
                 child: DrawerHeader(
-                  margin: EdgeInsets.all(12),
+                  margin: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                       color: Colors.green,
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           image: AssetImage(
                             backgrundImage,
                           ),
@@ -61,19 +59,19 @@ class drower extends StatelessWidget {
                                 scale: 3,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              userName ?? "",
-                              style: TextStyle(
+                              userName,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                               ),
                             ),
                             Text(
-                              email ?? "",
-                              style: TextStyle(
+                              email,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
                               ),
@@ -87,7 +85,7 @@ class drower extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.cancel_outlined,
                               color: Colors.white,
                             )),
@@ -106,7 +104,7 @@ class drower extends StatelessWidget {
                     color: primarycolor_cust,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'My Account',
                   style: TextStyle(
                     color: Colors.white,
@@ -116,7 +114,7 @@ class drower extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MyAccount()));
+                      MaterialPageRoute(builder: (context) => const MyAccount()));
                   Scaffold.of(context).closeDrawer();
                   // Navigator.pop(context);
                 },
@@ -131,7 +129,7 @@ class drower extends StatelessWidget {
                     scale: 10,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'Deposit History',
                   style: TextStyle(
                     color: Colors.white,
@@ -141,7 +139,7 @@ class drower extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => DepositHistory()));
+                      builder: (context) => const DepositHistory()));
                   Scaffold.of(context).closeDrawer();
                 },
               ),
@@ -155,7 +153,7 @@ class drower extends StatelessWidget {
                     scale: 4,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'Withdrawal History',
                   style: TextStyle(
                     color: Colors.white,
@@ -165,7 +163,7 @@ class drower extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => WithdrowHistory()));
+                      builder: (context) => const WithdrowHistory()));
                   Scaffold.of(context).closeDrawer();
                 },
               ),
@@ -178,7 +176,7 @@ class drower extends StatelessWidget {
                     scale: 4,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'Language',
                   style: TextStyle(
                     color: Colors.white,
@@ -200,7 +198,7 @@ class drower extends StatelessWidget {
                     scale: 20,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'Privacy Policy',
                   style: TextStyle(
                     color: Colors.white,
@@ -222,7 +220,7 @@ class drower extends StatelessWidget {
                     scale: 4,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'CURRNCY: THB & IND',
                   style: TextStyle(
                     color: Colors.white,
@@ -245,7 +243,7 @@ class drower extends StatelessWidget {
                     scale: 4,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'Tickets History',
                   style: TextStyle(
                     color: Colors.white,
@@ -255,7 +253,7 @@ class drower extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TicketScreen()));
+                      MaterialPageRoute(builder: (context) => const TicketScreen()));
                   Scaffold.of(context).closeDrawer();
                 },
               ),
@@ -269,7 +267,7 @@ class drower extends StatelessWidget {
                     color: primarycolor_cust,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   'About Us',
                   style: TextStyle(
                     color: Colors.white,
@@ -283,7 +281,7 @@ class drower extends StatelessWidget {
           ),
           bottomNavigationBar: GestureDetector(
             onTap: () async {
-              NetworkHtttp networkHtttp = NetworkHtttp();
+              NetworkHttp networkHtttp = NetworkHttp();
               SessionManager pref = SessionManager();
               networkHtttp.logout();
               pref.setString("username", '');
@@ -296,17 +294,17 @@ class drower extends StatelessWidget {
               phoneNumber = '';
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (route) => false);
             },
             child: Container(
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
               height: 45,
               decoration: BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'LOG OUT',
                   style: TextStyle(
@@ -323,12 +321,13 @@ class drower extends StatelessWidget {
   }
 
   currency(BuildContext context) {
+    NetworkHttp networkHtttp = NetworkHttp();
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16.0))),
 
           // title: Center(child: Text('Welcome')),
@@ -339,10 +338,10 @@ class drower extends StatelessWidget {
                 ic_currency,
                 scale: 4,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Center(
+              const Center(
                   child: Text(
                 'CURRENCY',
                 style: TextStyle(
@@ -350,26 +349,26 @@ class drower extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 18),
               )),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Please select your currency",
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PaymentScreen()));
+                      onTap: () async{
+                       await networkHtttp.changeContry("764");
+                       Navigator.of(context).pop();
                       },
                       child: Container(
                         height: 40,
@@ -377,7 +376,7 @@ class drower extends StatelessWidget {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "THB",
                             style: TextStyle(
@@ -389,14 +388,14 @@ class drower extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PaymentScreen()));
+                      onTap: () async{
+                      await  networkHtttp.changeContry("356");
+                        Navigator.pop(context);
                       },
                       child: Container(
                         height: 40,
@@ -404,7 +403,7 @@ class drower extends StatelessWidget {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "IND",
                             style: TextStyle(
@@ -431,7 +430,7 @@ class drower extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16.0))),
 
           // title: Center(child: Text('Welcome')),
@@ -442,10 +441,10 @@ class drower extends StatelessWidget {
                 ic_language_box,
                 scale: 4,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Center(
+              const Center(
                   child: Text(
                 'LANGUAGE',
                 style: TextStyle(
@@ -453,17 +452,17 @@ class drower extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 18),
               )),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Please select your language",
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -475,7 +474,7 @@ class drower extends StatelessWidget {
                         color: primarycolor_cust,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "ENGLISH",
                           style: TextStyle(
@@ -486,7 +485,7 @@ class drower extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -496,7 +495,7 @@ class drower extends StatelessWidget {
                         color: primarycolor_cust,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "THAI",
                           style: TextStyle(
@@ -509,7 +508,7 @@ class drower extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -521,7 +520,7 @@ class drower extends StatelessWidget {
                         color: primarycolor_cust,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "RUSSIAN",
                           style: TextStyle(
@@ -532,7 +531,7 @@ class drower extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -542,7 +541,7 @@ class drower extends StatelessWidget {
                         color: primarycolor_cust,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "CHINESE",
                           style: TextStyle(

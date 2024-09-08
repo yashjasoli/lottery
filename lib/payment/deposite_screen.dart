@@ -18,7 +18,7 @@ class DepositeScreen extends StatefulWidget {
 class _DepositeScreenState extends State<DepositeScreen> {
   TextEditingController amountController = TextEditingController();
   TextEditingController UTRController = TextEditingController();
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +51,26 @@ class _DepositeScreenState extends State<DepositeScreen> {
                 child: Image.asset(ic_qrCode,scale: 5,),
               ),
               SizedBox(height: 20,),
-              Text("Enter Deposite Amount",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 12,color: textcolor_cust2),),
-              SizedBox(height: 10,),
+              Container(
+                height: 50,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                    color: seconderycolor_cust.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20)),
+                child: TextFormField(
+                  controller: UTRController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.zero,
+                      hintText: "Enter UTR Number",
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: primarycolor_cust),
+                      border: InputBorder.none),
+                ),
+              ),
+              SizedBox(height: 20,),
               Container(
                 height: 50,
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -64,9 +82,11 @@ class _DepositeScreenState extends State<DepositeScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-
-                      hintText: "500",
-                      hintStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: textcolor_cust2),
+                      hintText: "Enter Deposite Amount",
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: primarycolor_cust),
                       border: InputBorder.none),
                 ),
               ),
@@ -144,24 +164,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
 
                 ],
               ),
-              SizedBox(height: 20,),
-              Text("Enter UTR  Number",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 12,color: primarycolor_cust),),
-              SizedBox(height: 10,),
-              Container(
-                height: 50,
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                    color: seconderycolor_cust.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20)),
-                child: TextFormField(
-                  controller: UTRController,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.zero,
-                      hintText: "4654648446",
-                      hintStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: primarycolor_cust),
-                      border: InputBorder.none),
-                ),
-              ),
+
               SizedBox(height: 50,),
               GestureDetector(
                 onTap: ()async{

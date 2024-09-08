@@ -1,9 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
-import 'package:thai_lottery/utility/dwers.dart';
 
 class FaqScreen extends StatefulWidget {
   const FaqScreen({super.key});
@@ -18,20 +16,20 @@ class _FaqScreenState extends State<FaqScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Center(
             child: Text(
               'FAQs',
               style: GoogleFonts.aclonica(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
                       color: textcolor_cust2)),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Accordion(
@@ -52,7 +50,7 @@ class _FaqScreenState extends State<FaqScreen> {
                 headerBackgroundColor: toolbarcolor_lang,
                 headerBackgroundColorOpened: toolbarcolor_lang,
                 contentBackgroundColor: toolbarcolor_lang,
-                header: Row(
+                header: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -69,8 +67,8 @@ class _FaqScreenState extends State<FaqScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Are my account details secure?",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: primarycolor_cust),),
-                      SizedBox(height: 20,),
+                      const Text("Are my account details secure?",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 12,color: primarycolor_cust),),
+                      const SizedBox(height: 20,),
                       Text('''Every effort has been made to ensure that your
 data is protected. Both our website and mobile
 app have state-of-the-art data security in

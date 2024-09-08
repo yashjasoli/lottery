@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/model/DepositHistoryModel.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/dwers.dart';
-import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
@@ -19,7 +18,7 @@ class WithdrowHistory extends StatefulWidget {
 class _WithdrowHistoryState extends State<WithdrowHistory> {
 
   bool isLoading = true;
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   late DepositHistoryModel depositHistoryModel;
 
   @override
@@ -29,7 +28,7 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
   }
 
   getdata() async {
-    Map<String, dynamic> data = await networkHtttp.withdraw_history();
+    Map<String, dynamic> data = await networkHtttp.withdrawHistory();
     depositHistoryModel = DepositHistoryModel.fromJson(data);
     isLoading = false;
     setState(() {});

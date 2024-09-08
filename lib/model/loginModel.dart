@@ -26,7 +26,7 @@ class Data {
   String? sId;
   String? name;
   String? email;
-  dynamic? balance;
+  dynamic balance;
   String? role;
   bool? loggedIn;
   int? mobileNo;

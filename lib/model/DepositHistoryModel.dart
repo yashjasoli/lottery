@@ -32,7 +32,7 @@ class Data {
   String? userId;
   int? amount;
   int? uTR;
-  dynamic? upiId;
+  dynamic upiId;
   int? currencyCode;
   String? status;
   String? paymentType;

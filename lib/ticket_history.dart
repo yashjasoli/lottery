@@ -18,7 +18,7 @@ class TicketScreen extends StatefulWidget {
 
 class _TicketScreenState extends State<TicketScreen> {
   allTicketModel _ticketModel = allTicketModel();
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   bool _isLoading = true;
 
   @override
@@ -28,7 +28,7 @@ class _TicketScreenState extends State<TicketScreen> {
   }
 
   getData() async {
-    Map<String, dynamic> data = await networkHtttp.all_ticket();
+    Map<String, dynamic> data = await networkHtttp.allTicket();
     _ticketModel = allTicketModel.fromJson(data);
     _isLoading = false;
     setState(() {});
@@ -37,26 +37,26 @@ class _TicketScreenState extends State<TicketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars(),
-      drawer: drower(),
+      appBar: const AppBars(),
+      drawer: const drower(),
       body: _isLoading == true
           ? progressdialog_custom()
           : Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Center(
                   child: Text(
                     'Tickets History',
                     style: GoogleFonts.aclonica(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w400,
                             color: textcolor_cust2)),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Expanded(
@@ -78,7 +78,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         header: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "Ticket No.",
                               style: TextStyle(
                                   fontSize: 14,
@@ -87,7 +87,7 @@ class _TicketScreenState extends State<TicketScreen> {
                             ),
                             Text(
                               ticket.ticketNumber.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                   color: primarycolor_cust),
@@ -96,7 +96,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         ),
                         content: ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: 5,
                           itemBuilder: (context, index) {
                             final itemText = [
@@ -110,7 +110,7 @@ class _TicketScreenState extends State<TicketScreen> {
                               },
                               {"label": "Buy Date", "value": "20-09-2024"},
                               {"label": "Draw Date", "value": "20-09-2024"},
-                              {"label": "Result", "value": ticket!.status}
+                              {"label": "Result", "value": ticket.status}
                             ][index];
 
                             return Column(
@@ -120,8 +120,8 @@ class _TicketScreenState extends State<TicketScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      itemText!["label"]!.toString(),
-                                      style: TextStyle(
+                                      itemText["label"]!.toString(),
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
                                           color: primarycolor_cust),
@@ -139,14 +139,14 @@ class _TicketScreenState extends State<TicketScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
                                   height: 1,
                                   color: Colors.white,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                               ],

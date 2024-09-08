@@ -6,6 +6,7 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../main.dart';
 import '../utility/requad_box.dart';
 
 class WithdrawScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class WithdrawScreen extends StatefulWidget {
 }
 
 class _WithdrawScreenState extends State<WithdrawScreen> {
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   TextEditingController UTRController = TextEditingController();
   TextEditingController amountController = TextEditingController();
 
@@ -194,13 +195,19 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {
-          if (amountController.text.isEmpty || UTRController.text.isEmpty) {
-            alert_success().alertSuccess(context);
+          if (double.parse(balance) < double.parse(amountController.text)) {
+            print("Please velid amount");
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Please Enter valid amount")));
           } else {
-            await networkHtttp.withdraw(
-                amountController.text, UTRController.text);
-            amountController.clear();
-            UTRController.clear();
+            if (amountController.text.isEmpty || UTRController.text.isEmpty) {
+              alert_success().alertSuccess(context);
+            } else {
+              await networkHtttp.withdraw(
+                  amountController.text, UTRController.text);
+              amountController.clear();
+              UTRController.clear();
+            }
           }
         },
         child: Container(

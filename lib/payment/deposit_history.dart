@@ -4,7 +4,6 @@ import 'package:thai_lottery/model/DepositHistoryModel.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
-import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
@@ -17,7 +16,7 @@ class DepositHistory extends StatefulWidget {
 
 class _DepositHistoryState extends State<DepositHistory> {
   bool isLoading = true;
-  NetworkHtttp networkHtttp = NetworkHtttp();
+  NetworkHttp networkHtttp = NetworkHttp();
   late DepositHistoryModel depositHistoryModel;
 
   @override
@@ -27,7 +26,7 @@ class _DepositHistoryState extends State<DepositHistory> {
   }
 
   getdata() async {
-    Map<String, dynamic> data = await networkHtttp.deposit_history();
+    Map<String, dynamic> data = await networkHtttp.depositHistory();
     depositHistoryModel = DepositHistoryModel.fromJson(data);
     isLoading = false;
     setState(() {});
@@ -37,25 +36,25 @@ class _DepositHistoryState extends State<DepositHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBars(),
-      drawer: drower(),
+      appBar: const AppBars(),
+      drawer: const drower(),
       body: isLoading == true
           ? progressdialog_custom()
           : SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Text(
                     'Deposite History',
                     style: GoogleFonts.aclonica(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w400,
                             color: textcolor_cust2)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ListView.builder(
@@ -107,7 +106,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(
+                                    const Text(
                                       "Amount",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
@@ -116,28 +115,28 @@ class _DepositHistoryState extends State<DepositHistory> {
                                     ),
                                     Text(
                                       depositHistoryModel.data![index].amount.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 10,
                                           color: primarycolor_cust),
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
                                   height: 1,
                                   color: Colors.white,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(
+                                    const Text(
                                       "Status",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
@@ -148,7 +147,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                                       height: 25,
                                       padding: const EdgeInsets.all(5),
                                       decoration: BoxDecoration(
-                                          color: Color(0xffEDF7EE),
+                                          color: const Color(0xffEDF7EE),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border:
@@ -156,7 +155,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                                       child: Center(
                                         child: Text(
                                           depositHistoryModel.data![index].status!.toUpperCase(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: primarycolor_cust,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w400),

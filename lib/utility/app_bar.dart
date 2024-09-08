@@ -12,17 +12,17 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       title: Image.asset(ic_logo,scale: 4,),
       centerTitle: true,
-      leading: Builder(
-        builder: (BuildContext context) {
-          return IconButton(
-            icon: Image.asset(ic_drower,scale: 4,),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          );
-        },
-      ),
+      // leading: Builder(
+      //   builder: (BuildContext context) {
+      //     return IconButton(
+      //       icon: Image.asset(ic_drower,scale: 4,),
+      //       onPressed: () {
+      //         Scaffold.of(context).openDrawer();
+      //       },
+      //       tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      //     );
+      //   },
+      // ),
       elevation: 0,
       actions: [
         Padding(

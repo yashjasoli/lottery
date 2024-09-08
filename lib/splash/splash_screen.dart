@@ -13,10 +13,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SessionManager pref = SessionManager();
+
   @override
   void initState() {
     navigation();
+    getuserData();
     super.initState();
+  }
+
+  getuserData() async {
+    userName = await pref.getString("username", "");
+    phoneNumber = await pref.getString("phone", "");
+    balance = await pref.getString("balance", "");
+    email = await pref.getString("email", "");
+    token = await pref.getString("token", "");
+    setState(() {});
   }
 
   navigation() async {
@@ -25,13 +37,17 @@ class _SplashScreenState extends State<SplashScreen> {
     if (userName == '') {
       await Future.delayed(
           Duration(seconds: 1),
-          () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LanguageScreen())));
+          () => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LanguageScreen()),
+              (route) => false));
     } else {
       await Future.delayed(
           Duration(seconds: 1),
-          () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomeScreen())));
+          () => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false));
     }
   }
 
