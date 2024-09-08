@@ -12,6 +12,28 @@ class DrawResuits extends StatefulWidget {
 }
 
 class _DrawResuitsState extends State<DrawResuits> {
+
+  List<String> name = [
+    "Yash 1",
+    "Yash 2",
+    "Yash 3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,89 +326,97 @@ class _DrawResuitsState extends State<DrawResuits> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Image.asset(
-                        ic_number_2,
-                        scale: 4.0,
-                      ),
-                      const Text(
-                        "Abir",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Text(
-                        "Score 0",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Image.asset(
-                        ic_number_1,
-                        scale: 3.9,
-                      ),
-                      const Text(
-                        "John",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Text(
-                        "Score 4.5",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Image.asset(
-                        ic_number_3,
-                        scale: 4.0,
-                      ),
-                      const Text(
-                        "Stal",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Text(
-                        "Score 0",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
               const SizedBox(
                 height: 30,
               ),
               ListView.builder(
-                  itemCount: 12,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, index) {
+                itemCount: name.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == 0) {
+                    // Custom layout for the first item (Row containing 3 Columns)
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // Column 2 (index 0)
+                        Column(
+                          children: [
+                            Image.asset(
+                              ic_number_2,
+                              scale: 4.0,
+                            ),
+                            Text(
+                              name[1], // Corresponding name for index 0
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "Score 0", // Static score or make it dynamic
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Column 1 (index 1)
+                        Column(
+                          children: [
+                            Image.asset(
+                              ic_number_1,
+                              scale: 3.9,
+                            ),
+                            Text(
+                              name[0], // Corresponding name for index 1
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "Score 4.5", // Static score or make it dynamic
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Column 3 (index 2)
+                        Column(
+                          children: [
+                            Image.asset(
+                              ic_number_3,
+                              scale: 4.0,
+                            ),
+                            Text(
+                              name[2], // Corresponding name for index 2
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "Score 0", // Static score or make it dynamic
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  } else if (index >= 3) {
+                    // Different layout for other items starting from index 3
                     return Container(
                       decoration: BoxDecoration(
-                          color: toolbarcolor_lang,
-                          borderRadius: BorderRadius.circular(10)),
+                        color: toolbarcolor_lang,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
                         onTap: () {},
@@ -397,30 +427,37 @@ class _DrawResuitsState extends State<DrawResuits> {
                             scale: 3,
                           ),
                         ),
-                        title: const Text(
-                          "MD NAZIM",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: primarycolor_cust),
+                        title: Text(
+                          name[index], // Display the name dynamically for other items
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: primarycolor_cust,
+                          ),
                         ),
                         subtitle: const Text(
-                          "nazimsat786@gmail.com",
+                          "nazimsat786@gmail.com", // Adjust if necessary
                           style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10,
-                              color: greycolor_cust),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10,
+                            color: greycolor_cust,
+                          ),
                         ),
                         trailing: const Text(
-                          "Score 0",
+                          "Score 0", // Static score or dynamic if needed
                           style: TextStyle(
-                              fontSize: 8,
-                              fontWeight: FontWeight.w500,
-                              color: greycolor_cust),
+                            fontSize: 8,
+                            fontWeight: FontWeight.w500,
+                            color: greycolor_cust,
+                          ),
                         ),
                       ),
                     );
-                  })
+                  } else {
+                    return Container(); // Return an empty container for index 1 and 2 (or modify as needed)
+                  }
+                },
+              )
             ],
           ),
         ),
