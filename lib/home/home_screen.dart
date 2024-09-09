@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    "THB $balance",
+                    "$currncy $balance",
                     style: const TextStyle(
                       color: textcolor_cust,
                       fontWeight: FontWeight.w600,
@@ -355,9 +355,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(
                                           color: Colors.white, width: 1)),
-                                  child: const Center(
+                                  child:  Center(
                                     child: Text(
-                                      "THB 80",
+                                      "$currncy 80",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -368,8 +368,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Text(
-                                  "THB 15,000,000",
+                                 Text(
+                                  "$currncy 15,000,000",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -996,7 +996,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: dark_grey_background_cust,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Column(
+                      child:  Column(
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
@@ -1032,7 +1032,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "50Lakh THB",
+                                "50Lakh $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1054,7 +1054,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "20Lakh THB",
+                                "20Lakh $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1076,7 +1076,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "10Lakh THB",
+                                "10Lakh $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1098,7 +1098,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "1Lakh THB",
+                                "1Lakh $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1120,7 +1120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "80K THB",
+                                "80K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1142,7 +1142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "40K THB",
+                                "40K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1164,7 +1164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "20K THB",
+                                "20K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1186,7 +1186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "10K THB",
+                                "10K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1208,7 +1208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "5K THB",
+                                "5K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1230,7 +1230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "1K THB",
+                                "1K $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1252,7 +1252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "500 THB",
+                                "500 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,

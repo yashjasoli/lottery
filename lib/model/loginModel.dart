@@ -23,19 +23,19 @@ class LoginModel {
 }
 
 class Data {
-  String? sId;
-  String? name;
-  String? email;
+  dynamic sId;
+  dynamic name;
+  dynamic email;
   dynamic balance;
-  String? role;
+  dynamic role;
   bool? loggedIn;
-  int? mobileNo;
-  String? country;
-  String? password;
-  String? language;
-  int? currencyCode;
-  String? createdAt;
-  int? iV;
+  dynamic mobileNo;
+  dynamic country;
+  dynamic password;
+  dynamic language;
+  dynamic currencyCode;
+  dynamic createdAt;
+  dynamic iV;
 
   Data(
       {this.sId,

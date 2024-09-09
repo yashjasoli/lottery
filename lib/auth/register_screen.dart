@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/home/home_screen.dart';
+import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/model/loginModel.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
@@ -31,7 +32,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _isLoading == true
+        ? progressdialog_custom()
+        : Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         // leading: Padding(
@@ -66,9 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ],
         elevation: 0,
       ),
-      body: _isLoading == true
-          ? progressdialog_custom()
-          : SingleChildScrollView(
+      body:  SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: Column(
@@ -279,15 +280,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        setState(() {
-                          _isLoading = true;
-                        });
+
                         if (phoneController.text.isEmpty ||
                             passwordController.text.isEmpty ||
                             nameController.text.isEmpty ||
                             phoneController.text.isEmpty) {
                           alert_success().alertSuccess(context);
                         } else {
+                          setState(() {
+                            _isLoading = true;
+                          });
                           Map<String, dynamic> data =
                               await networkHtttp.register(
                                   emailController.text,
@@ -302,9 +304,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             pref.setString(
                                 "email", loginModel.data!.email.toString());
                             pref.setString(
+                                "token", loginModel.token.toString());
+                            pref.setString(
                                 "balance", loginModel.data!.balance.toString());
                             pref.setString(
                                 "phone", loginModel.data!.mobileNo.toString());
+
+                            userName = await pref.getString("username", "");
+                            phoneNumber = await pref.getString("phone", "");
+                            balance = await pref.getString("balance", "");
+                            email = await pref.getString("email", "");
+                            token = await pref.getString("token", "");
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomeScreen()));

@@ -28,13 +28,13 @@ class AllLottery {
 }
 
 class Data {
-  String? sId;
-  String? userId;
-  String? name;
-  int? price;
-  int? totalDraw;
-  int? repeatDraw;
-  int? iV;
+  dynamic sId;
+  dynamic userId;
+  dynamic name;
+  dynamic price;
+  dynamic totalDraw;
+  dynamic repeatDraw;
+  dynamic iV;
 
   Data(
       {this.sId,

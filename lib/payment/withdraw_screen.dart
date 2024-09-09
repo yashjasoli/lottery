@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:thai_lottery/home/home_screen.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
@@ -207,6 +208,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   amountController.text, UTRController.text);
               amountController.clear();
               UTRController.clear();
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeScreen()));
             }
           }
         },
@@ -218,7 +220,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Text(
-              "DEPOSITE NOW",
+              "Withdraw NOW",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

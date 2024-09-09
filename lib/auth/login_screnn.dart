@@ -30,7 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _isLoading == true
+        ? progressdialog_custom()
+        : Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         // leading: Padding(
@@ -62,9 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
         elevation: 0,
       ),
-      body: _isLoading == true
-          ? progressdialog_custom()
-          : SingleChildScrollView(
+      body:  SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: Column(
@@ -190,14 +190,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        setState(() {
-                          _isLoading = true;
-                        });
+
                         if (phoneController.text.isEmpty ||
                             ischeck == false ||
                             passwordController.text.isEmpty) {
                           alert_success().alertSuccess(context);
                         } else {
+                          setState(() {
+                            _isLoading = true;
+                          });
                           Map<String, dynamic> data = await networkHtttp.login(
                               phoneController.text, passwordController.text);
                           loginModel = LoginModel.fromJson(data);

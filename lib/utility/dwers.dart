@@ -71,6 +71,8 @@ class drower extends StatelessWidget {
                             ),
                             Text(
                               email,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -368,6 +370,7 @@ class drower extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async{
                        await networkHtttp.changeContry("764");
+                       currncy = 'THB';
                        Navigator.of(context).pop();
                       },
                       child: Container(
@@ -395,7 +398,9 @@ class drower extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async{
                       await  networkHtttp.changeContry("356");
+                      currncy = "INR";
                         Navigator.pop(context);
+
                       },
                       child: Container(
                         height: 40,
@@ -405,7 +410,7 @@ class drower extends StatelessWidget {
                         ),
                         child: const Center(
                           child: Text(
-                            "IND",
+                            "INR",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

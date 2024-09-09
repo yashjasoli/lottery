@@ -290,7 +290,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                           borderRadius: BorderRadius.circular(20)),
                       child: const Center(
                         child: Text(
-                          "THB 268,298",
+                          "currncy 268,298",
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,

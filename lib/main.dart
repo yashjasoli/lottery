@@ -8,6 +8,7 @@ String email = '';
 String balance = '';
 String phoneNumber = '';
 String token = '';
+String currncy = 'THB';
 
 void main() {
   runApp(const MyApp());

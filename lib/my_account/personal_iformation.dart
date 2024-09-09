@@ -6,6 +6,8 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../utility/shared_preferences.dart';
+
 class PersonalInformation extends StatefulWidget {
   const PersonalInformation({super.key});
 
@@ -18,6 +20,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController emailController = TextEditingController(text: email);
   TextEditingController phoneController = TextEditingController(text: phoneNumber);
   NetworkHttp networkHtttp = NetworkHttp();
+  SessionManager pref = SessionManager();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,6 +134,16 @@ class _PersonalInformationState extends State<PersonalInformation> {
       bottomNavigationBar: GestureDetector(
        onTap: ()async{
          networkHtttp.update(emailController.text, phoneController.text, nameController.text);
+         pref.setString(
+             "username", nameController.text);
+         pref.setString(
+             "email", emailController.text);
+         pref.setString(
+             "phone", phoneController.text);
+         userName = await pref.getString("username", "");
+         phoneNumber = await pref.getString("phone", "");
+         email = await pref.getString("email", "");
+         setState(() {});
        },
        child: Container(
          height: 40,

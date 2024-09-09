@@ -28,15 +28,15 @@ class allTicketModel {
 }
 
 class Data {
-  String? sId;
-  String? userId;
+  dynamic sId;
+  dynamic userId;
   LotteryId? lotteryId;
-  String? lotteryDrawId;
-  int? ticketNumber;
-  String? status;
-  String? createdAt;
-  int? iV;
-  String? lotteryPriceId;
+  dynamic lotteryDrawId;
+  dynamic ticketNumber;
+  dynamic status;
+  dynamic createdAt;
+  dynamic iV;
+  dynamic lotteryPriceId;
 
   Data(
       {this.sId,

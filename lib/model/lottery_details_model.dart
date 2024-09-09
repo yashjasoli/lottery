@@ -23,10 +23,10 @@ class LotteryDetailsModel {
 }
 
 class Data {
-  int? winningPrice;
-  int? totalDraw;
-  int? price;
-  String? drawDate;
+  dynamic winningPrice;
+  dynamic totalDraw;
+  dynamic price;
+  dynamic drawDate;
 
   Data({this.winningPrice, this.totalDraw, this.price, this.drawDate});
 

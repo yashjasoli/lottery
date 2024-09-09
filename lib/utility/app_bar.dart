@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/utility/colors.dart';
@@ -12,6 +13,18 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       title: Image.asset(ic_logo,scale: 4,),
       centerTitle: true,
+      leading: GestureDetector(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: CircleAvatar(
+            backgroundColor: Color(0xffF1F6F9),
+            child: Icon(CupertinoIcons.back),
+          ),
+        ),
+      ),
       // leading: Builder(
       //   builder: (BuildContext context) {
       //     return IconButton(
@@ -39,7 +52,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Text(
-                "THB $balance",
+                "$currncy $balance",
                 style: TextStyle(
                   color: textcolor_cust,
                   fontWeight: FontWeight.w600,

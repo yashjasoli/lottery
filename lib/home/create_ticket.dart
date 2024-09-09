@@ -2,9 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:thai_lottery/home/home_screen.dart';
+import 'package:thai_lottery/payment/deposite_screen.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../main.dart';
 import '../model/lottery_details_model.dart';
 import '../model/ticket_number_model.dart';
 import '../utility/progressdialog_custom.dart';
@@ -55,7 +58,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       setState(() {
         remainingTime = nextDrawDate.difference(DateTime.now());
         if (remainingTime.isNegative) {
-          //  timer.cancel();
+           // timer.cancel();
         }
       });
     });
@@ -147,7 +150,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("THB", style: _whiteText(12)),
+                Text(currncy, style: _whiteText(12)),
                 Text("15,000,000", style: _whiteText(20)),
                 Container(
                   width: 2,
@@ -194,8 +197,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "Friday, 12 July 2024",
+           Text(
+            "Friday, ${lotteryDetailsModel.data!.drawDate}",
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
           const SizedBox(height: 16),
@@ -261,8 +264,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             child: _buildTicketList(),
           ),
           const SizedBox(height: 20),
-          const Text(
-            "1 Draw With 2 Tickets: 2 x 50\nTotal Amount: 100",
+           Text(
+            "1 Draw With ${tickets.length} Tickets: ${tickets.length} x 80\nTotal Amount: ${tickets.length*80}",
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
           ),
@@ -333,8 +336,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
-        Text("Price: \$50", style: TextStyle(color: Colors.white)),
+       // Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
+        Text("Price: \$80", style: TextStyle(color: Colors.white)),
       ],
     );
   }
@@ -568,7 +571,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeScreen()));
                 },
                 child: Container(
                   height: 40,
@@ -633,7 +636,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DepositeScreen()));
                 },
                 child: Container(
                   height: 40,

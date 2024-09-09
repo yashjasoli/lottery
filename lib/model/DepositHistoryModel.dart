@@ -28,17 +28,17 @@ class DepositHistoryModel {
 }
 
 class Data {
-  String? sId;
-  String? userId;
-  int? amount;
-  int? uTR;
+  dynamic sId;
+  dynamic userId;
+  dynamic amount;
+  dynamic uTR;
   dynamic upiId;
-  int? currencyCode;
-  String? status;
-  String? paymentType;
-  String? actionStatus;
-  String? createdAt;
-  int? iV;
+  dynamic currencyCode;
+  dynamic status;
+  dynamic paymentType;
+  dynamic actionStatus;
+  dynamic createdAt;
+  dynamic iV;
 
   Data(
       {this.sId,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/utility/colors.dart';
+import 'package:thai_lottery/utility/no_data.dart';
 
 import '../model/all_ticket_model.dart';
 import '../utility/network_http.dart';
@@ -36,7 +37,7 @@ class _OrderScreenState extends State<OrderScreen> {
       body: _isLoading == true
           ? progressdialog_custom()
           : SingleChildScrollView(
-        child: Column(
+        child: _ticketModel.data!.length < 0 ? NoDataAvaible() :   Column(
           children: <Widget>[
             const SizedBox(height: 50,),
             Text('Orders',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
@@ -96,7 +97,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     color: primarycolor_cust),
                               ),
                               Text(
-                                _ticketModel.data![index].lotteryId!.name.toString(),
+                                _ticketModel.data![index].lotteryId?.name.toString() ?? "",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 10,
