@@ -4,6 +4,7 @@ import 'package:thai_lottery/model/DepositHistoryModel.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
+import 'package:thai_lottery/utility/no_data.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
 import '../utility/colors.dart';
@@ -48,7 +49,7 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
             SizedBox(height: 50,),
             Text('Withdraw History',style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
             SizedBox(height: 10,),
-            ListView.builder(
+            depositHistoryModel.data!.length < 1 ? Center(child: NoDataAvaible()) : ListView.builder(
                 itemCount: depositHistoryModel.data!.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

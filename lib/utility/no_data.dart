@@ -11,11 +11,12 @@ class NoDataAvaible extends StatefulWidget {
 class _NoDataAvaibleState extends State<NoDataAvaible> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Container(
+      height: MediaQuery.of(context).size.height*0.5,
+      child: Center(
         child: Lottie.network(
             "https://lottie.host/7b49ef40-240e-463b-82f5-03945e19f38a/zFUNyQg7qp.json",
-            height: 500),
+            height: 200,),
       ),
     );
   }

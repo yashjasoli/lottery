@@ -400,11 +400,11 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   }
 
   Widget _buildTicketHeader() {
-    return const Row(
+    return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
        // Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
-        Text("Price: \$80", style: TextStyle(color: Colors.white)),
+        Text("Price: ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}  ", style: TextStyle(color: Colors.white)),
       ],
     );
   }

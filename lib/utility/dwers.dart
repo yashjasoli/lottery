@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thai_lottery/auth/login_screnn.dart';
 import 'package:thai_lottery/main.dart';
+import 'package:thai_lottery/model/monayModel.dart';
 import 'package:thai_lottery/my_account/my_account.dart';
 import 'package:thai_lottery/payment/deposit_history.dart';
 import 'package:thai_lottery/payment/withdrow_history.dart';
@@ -10,8 +11,14 @@ import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
-class drower extends StatelessWidget {
+class drower extends StatefulWidget {
   const drower({super.key});
+
+  @override
+  State<drower> createState() => _drowerState();
+}
+
+class _drowerState extends State<drower> {
 
   @override
   Widget build(BuildContext context) {
@@ -324,6 +331,8 @@ class drower extends StatelessWidget {
 
   currency(BuildContext context) {
     NetworkHttp networkHtttp = NetworkHttp();
+    MonayModel monayModel = MonayModel();
+    SessionManager pref = SessionManager();
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -369,7 +378,12 @@ class drower extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () async{
-                       await networkHtttp.changeContry("764");
+                        Map<String,dynamic> ref = await  networkHtttp.changeContry("764");
+                        monayModel = MonayModel.fromJson(ref);
+                        pref.setString(
+                            "balance", monayModel.data!.balance.toString());
+                        pref.setString("currency", "THB");
+                        balance = monayModel.data!.balance.toString();
                        currncy = 'THB';
                        Navigator.of(context).pop();
                       },
@@ -397,7 +411,12 @@ class drower extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () async{
-                      await  networkHtttp.changeContry("356");
+                   Map<String,dynamic> ref = await  networkHtttp.changeContry("356");
+                   monayModel = MonayModel.fromJson(ref);
+                   pref.setString(
+                       "balance", monayModel.data!.balance.toString());
+                    pref.setString("currency", "INR");
+                    balance = monayModel.data!.balance.toString();
                       currncy = "INR";
                         Navigator.pop(context);
 

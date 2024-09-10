@@ -5,6 +5,7 @@ import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
+import 'package:thai_lottery/utility/no_data.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
 class DepositHistory extends StatefulWidget {
@@ -57,7 +58,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ListView.builder(
+                  depositHistoryModel.data!.length < 1 ? Center(child: NoDataAvaible()) :  ListView.builder(
                       itemCount: depositHistoryModel.data!.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

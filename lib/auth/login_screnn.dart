@@ -203,6 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               phoneController.text, passwordController.text);
                           loginModel = LoginModel.fromJson(data);
                           if (loginModel.status == true) {
+                            currncy = loginModel.data!.currencyCode.toString();
                             print("login");
                             pref.setString(
                                 "username", loginModel.data!.name.toString());
@@ -212,19 +213,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 "token", loginModel.token.toString());
                             pref.setString(
                                 "balance", loginModel.data!.balance.toString());
-                            pref.setString(
-                                "phone", loginModel.data!.mobileNo.toString());
+                            pref.setString("phone", loginModel.data!.mobileNo.toString());
+                            pref.setString("country", loginModel.data!.country.toString());
 
                             userName = await pref.getString("username", "");
                             phoneNumber = await pref.getString("phone", "");
                             balance = await pref.getString("balance", "");
                             email = await pref.getString("email", "");
                             token = await pref.getString("token", "");
+                            currncy = await pref.getString("country", "");
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomeScreen()));
                             passwordController.clear();
                             phoneController.clear();
+                          }else{
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            var snackBar = SnackBar(
+                              content: Text("Invalid Email or Password"),
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: primarycolor_cust,
+                              hitTestBehavior: HitTestBehavior.opaque,);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         }
                       },

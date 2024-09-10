@@ -35,6 +35,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _isLoading == true
           ? progressdialog_custom()
           : RefreshIndicator(
@@ -42,12 +43,12 @@ class _OrderScreenState extends State<OrderScreen> {
               getData();
             },
             child: SingleChildScrollView(
-                    child: _ticketModel.data!.length < 0 ? NoDataAvaible() :   Column(
+                    child:    Column(
             children: <Widget>[
               const SizedBox(height: 50,),
               Text('Orders',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
               const SizedBox(height: 10,),
-              ListView.builder(
+              _ticketModel.data!.length < 1 ? Center(child: NoDataAvaible()) : ListView.builder(
                   itemCount: _ticketModel.data!.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
