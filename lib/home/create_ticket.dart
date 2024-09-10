@@ -35,34 +35,102 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   @override
   void initState() {
     super.initState();
-
     getData();
-    // Start the timer that updates every second
   }
 
   getData() async {
-    Map<String, dynamic> ref = await networkHtttp.lotteryDetails(widget.id);
-    lotteryDetailsModel = LotteryDetailsModel.fromJson(ref);
-    _isLoading = false;
+    try {
+      Map<String, dynamic> ref = await networkHtttp.lotteryDetails(widget.id);
+      lotteryDetailsModel = LotteryDetailsModel.fromJson(ref);
+      _isLoading = false;
 
-    print(lotteryDetailsModel.data!.drawDate!.split("-")[0]);
-    nextDrawDate = DateTime(
+      nextDrawDate = DateTime(
         int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[0]),
         int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[1]),
         int.parse(lotteryDetailsModel.data!.drawDate!.split("-")[2]),
         0,
         0,
-        0); // Set the date of the next draw
-    remainingTime = nextDrawDate.difference(DateTime.now());
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        remainingTime = nextDrawDate.difference(DateTime.now());
-        if (remainingTime.isNegative) {
-           // timer.cancel();
-        }
+        0,
+      ); // Set the date of the next draw
+
+      remainingTime = nextDrawDate.difference(DateTime.now());
+
+      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        setState(() {
+          remainingTime = nextDrawDate.difference(DateTime.now());
+
+          if (remainingTime.isNegative) {
+            timer.cancel();
+            showTimeCompletedDialog();  // Show dialog when time is complete
+          }
+        });
       });
-    });
-    setState(() {});
+      setState(() {});
+    } catch (e) {
+      print("Error: $e");
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void showTimeCompletedDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.network(
+                  "https://assets7.lottiefiles.com/private_files/lf30_editor_jxsyvmne.json",
+                  height: 200),
+              const Text(
+                "Time Completed!",
+                style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22),
+              ),
+              const SizedBox(height: 30),
+              const Text(
+                "The draw time has been completed. Please check your results.",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();  // Close the dialog
+                },
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: primarycolor_cust,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Okay",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -150,7 +218,6 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(currncy, style: _whiteText(12)),
                 Text("15,000,000", style: _whiteText(20)),
                 Container(
                   width: 2,

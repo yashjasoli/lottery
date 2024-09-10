@@ -196,20 +196,20 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {
-          if (double.parse(balance) < double.parse(amountController.text)) {
+          if (amountController.text.isEmpty || UTRController.text.isEmpty) {
+            alert_success().alertSuccess(context);
+          } else if (double.parse(balance) <
+              double.parse(amountController.text)) {
             print("Please velid amount");
             ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text("Please Enter valid amount")));
           } else {
-            if (amountController.text.isEmpty || UTRController.text.isEmpty) {
-              alert_success().alertSuccess(context);
-            } else {
-              await networkHtttp.withdraw(
-                  amountController.text, UTRController.text);
-              amountController.clear();
-              UTRController.clear();
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeScreen()));
-            }
+            await networkHtttp.withdraw(
+                amountController.text, UTRController.text);
+            amountController.clear();
+            UTRController.clear();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomeScreen()));
           }
         },
         child: Container(
