@@ -1,7 +1,7 @@
 class AllLottery {
-  bool? status;
+  dynamic status;
   List<Data>? data;
-  String? message;
+  dynamic message;
 
   AllLottery({this.status, this.data, this.message});
 
@@ -35,6 +35,8 @@ class Data {
   dynamic totalDraw;
   dynamic repeatDraw;
   dynamic iV;
+  LotteryDraw? lotteryDraw;
+  List<Winner>? winner;
 
   Data(
       {this.sId,
@@ -43,7 +45,9 @@ class Data {
         this.price,
         this.totalDraw,
         this.repeatDraw,
-        this.iV});
+        this.iV,
+        this.lotteryDraw,
+        this.winner});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -53,6 +57,15 @@ class Data {
     totalDraw = json['totalDraw'];
     repeatDraw = json['repeatDraw'];
     iV = json['__v'];
+    lotteryDraw = json['lottery_draw'] != null
+        ? new LotteryDraw.fromJson(json['lottery_draw'])
+        : null;
+    if (json['winner'] != null) {
+      winner = <Winner>[];
+      json['winner'].forEach((v) {
+        winner!.add(new Winner.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -63,6 +76,162 @@ class Data {
     data['price'] = this.price;
     data['totalDraw'] = this.totalDraw;
     data['repeatDraw'] = this.repeatDraw;
+    data['__v'] = this.iV;
+    if (this.lotteryDraw != null) {
+      data['lottery_draw'] = this.lotteryDraw!.toJson();
+    }
+    if (this.winner != null) {
+      data['winner'] = this.winner!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class LotteryDraw {
+  dynamic sId;
+  dynamic lotteryId;
+  dynamic startDate;
+  dynamic drawDate;
+  dynamic status;
+  dynamic iV;
+
+  LotteryDraw(
+      {this.sId,
+        this.lotteryId,
+        this.startDate,
+        this.drawDate,
+        this.status,
+        this.iV});
+
+  LotteryDraw.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    lotteryId = json['lottery_id'];
+    startDate = json['startDate'];
+    drawDate = json['drawDate'];
+    status = json['status'];
+    iV = json['__v'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['lottery_id'] = this.lotteryId;
+    data['startDate'] = this.startDate;
+    data['drawDate'] = this.drawDate;
+    data['status'] = this.status;
+    data['__v'] = this.iV;
+    return data;
+  }
+}
+
+class Winner {
+  dynamic sId;
+  UserId? userId;
+  dynamic lotteryId;
+  dynamic lotteryDrawId;
+  dynamic ticketNumber;
+  dynamic status;
+  dynamic createdAt;
+  dynamic iV;
+  dynamic lotteryPriceId;
+
+  Winner(
+      {this.sId,
+        this.userId,
+        this.lotteryId,
+        this.lotteryDrawId,
+        this.ticketNumber,
+        this.status,
+        this.createdAt,
+        this.iV,
+        this.lotteryPriceId});
+
+  Winner.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    userId =
+    json['user_id'] != null ? new UserId.fromJson(json['user_id']) : null;
+    lotteryId = json['lottery_id'];
+    lotteryDrawId = json['lottery_draw_id'];
+    ticketNumber = json['ticketNumber'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    iV = json['__v'];
+    lotteryPriceId = json['lottery_price_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    if (this.userId != null) {
+      data['user_id'] = this.userId!.toJson();
+    }
+    data['lottery_id'] = this.lotteryId;
+    data['lottery_draw_id'] = this.lotteryDrawId;
+    data['ticketNumber'] = this.ticketNumber;
+    data['status'] = this.status;
+    data['createdAt'] = this.createdAt;
+    data['__v'] = this.iV;
+    data['lottery_price_id'] = this.lotteryPriceId;
+    return data;
+  }
+}
+
+class UserId {
+  dynamic sId;
+  dynamic name;
+  dynamic email;
+  dynamic balance;
+  dynamic role;
+  dynamic loggedIn;
+  dynamic mobileNo;
+  dynamic country;
+  dynamic language;
+  dynamic currencyCode;
+  dynamic createdAt;
+  dynamic iV;
+
+  UserId(
+      {this.sId,
+        this.name,
+        this.email,
+        this.balance,
+        this.role,
+        this.loggedIn,
+        this.mobileNo,
+        this.country,
+        this.language,
+        this.currencyCode,
+        this.createdAt,
+        this.iV});
+
+  UserId.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    name = json['name'];
+    email = json['email'];
+    balance = json['balance'];
+    role = json['role'];
+    loggedIn = json['loggedIn'];
+    mobileNo = json['mobile_No'];
+    country = json['country'];
+    language = json['language'];
+    currencyCode = json['currency_code'];
+    createdAt = json['createdAt'];
+    iV = json['__v'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['balance'] = this.balance;
+    data['role'] = this.role;
+    data['loggedIn'] = this.loggedIn;
+    data['mobile_No'] = this.mobileNo;
+    data['country'] = this.country;
+    data['language'] = this.language;
+    data['currency_code'] = this.currencyCode;
+    data['createdAt'] = this.createdAt;
     data['__v'] = this.iV;
     return data;
   }

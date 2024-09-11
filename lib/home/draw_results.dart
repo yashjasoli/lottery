@@ -4,7 +4,12 @@ import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
 
+import '../model/all_lottery_model.dart';
+import '../utility/network_http.dart';
+import '../utility/progressdialog_custom.dart';
+
 class DrawResuits extends StatefulWidget {
+
   const DrawResuits({super.key});
 
   @override
@@ -12,6 +17,22 @@ class DrawResuits extends StatefulWidget {
 }
 
 class _DrawResuitsState extends State<DrawResuits> {
+  NetworkHttp networkHtttp = NetworkHttp();
+  late AllLottery allLottery;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    Map<String, dynamic> ref = await networkHtttp.allLottery();
+    allLottery = AllLottery.fromJson(ref);
+    _isLoading = false;
+    setState(() {});
+  }
 
   List<String> name = [
     "Yash 1",
@@ -20,17 +41,6 @@ class _DrawResuitsState extends State<DrawResuits> {
     "4",
     "5",
     "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
   ];
 
 
@@ -40,7 +50,9 @@ class _DrawResuitsState extends State<DrawResuits> {
       backgroundColor: Colors.white,
       appBar: const AppBars(),
       // drawer: drower(),
-      body: SingleChildScrollView(
+      body: _isLoading == true
+          ? progressdialog_custom()
+          : SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(),
           child: Column(
@@ -330,7 +342,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                 height: 30,
               ),
               ListView.builder(
-                itemCount: name.length,
+                itemCount: allLottery.data![0].winner!.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
@@ -347,7 +359,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                               scale: 4.0,
                             ),
                             Text(
-                              name[1], // Corresponding name for index 0
+                              allLottery.data![0].winner![1].userId!.name.toString(), // Corresponding name for index 0
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -370,7 +382,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                               scale: 3.9,
                             ),
                             Text(
-                              name[0], // Corresponding name for index 1
+                              allLottery.data![0].winner![0].userId!.name.toString(), // Corresponding name for index 1
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -393,7 +405,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                               scale: 4.0,
                             ),
                             Text(
-                              name[2], // Corresponding name for index 2
+                              allLottery.data![0].winner![2].userId!.name.toString(), // Corresponding name for index 2
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -428,15 +440,15 @@ class _DrawResuitsState extends State<DrawResuits> {
                           ),
                         ),
                         title: Text(
-                          name[index], // Display the name dynamically for other items
+                          allLottery.data![0].winner![index].userId!.name.toString(), // Display the name dynamically for other items
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: primarycolor_cust,
                           ),
                         ),
-                        subtitle: const Text(
-                          "nazimsat786@gmail.com", // Adjust if necessary
+                        subtitle:  Text(
+                          allLottery.data![0].winner![1].userId!.email.toString(), // Adjust if necessary
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 10,
@@ -457,6 +469,9 @@ class _DrawResuitsState extends State<DrawResuits> {
                     return Container(); // Return an empty container for index 1 and 2 (or modify as needed)
                   }
                 },
+              ),
+              SizedBox(
+                height: 20,
               )
             ],
           ),

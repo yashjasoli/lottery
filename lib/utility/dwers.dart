@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thai_lottery/auth/login_screnn.dart';
 import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/model/monayModel.dart';
@@ -11,6 +12,8 @@ import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
+import '../local/app_langugage_provider.dart';
+
 class drower extends StatefulWidget {
   const drower({super.key});
 
@@ -19,9 +22,10 @@ class drower extends StatefulWidget {
 }
 
 class _drowerState extends State<drower> {
-
+  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
+    appLanguage = Provider.of<AppLanguageProvider>(context);
     return Drawer(
       backgroundColor: primarycolor_cust,
       surfaceTintColor: Colors.red,
@@ -492,19 +496,25 @@ class _drowerState extends State<drower> {
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: primarycolor_cust,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "ENGLISH",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
+                    child: GestureDetector(
+                      onTap: () {
+                        appLanguage.changeLanguage(const Locale("en"));
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: primarycolor_cust,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "ENGLISH",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14),
+                          ),
                         ),
                       ),
                     ),
@@ -513,19 +523,25 @@ class _drowerState extends State<drower> {
                     width: 10,
                   ),
                   Expanded(
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: primarycolor_cust,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "THAI",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
+                    child: GestureDetector(
+                      onTap: () {
+                        appLanguage.changeLanguage(const Locale("ru"));
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: primarycolor_cust,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "THAI",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14),
+                          ),
                         ),
                       ),
                     ),

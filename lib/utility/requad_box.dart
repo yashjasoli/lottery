@@ -5,7 +5,7 @@ import 'colors.dart';
 class alert_success {
   alertSuccess(BuildContext context) {
     var snackBar = SnackBar(
-      content: Text("Plase Enter Data"),
+      content: Text("Please Enter Data"),
       behavior: SnackBarBehavior.floating,
     backgroundColor: primarycolor_cust,
     hitTestBehavior: HitTestBehavior.opaque,);

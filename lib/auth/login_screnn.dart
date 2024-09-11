@@ -221,8 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             pref.setString(
                                 "balance", loginModel.data!.balance.toString());
                             pref.setString("phone", loginModel.data!.mobileNo.toString());
-                            pref.setString("country", loginModel.data!.country.toString()  == "India" ? "INR" : "THR");
-
+                            pref.setString("country", loginModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
                             userName = await pref.getString("username", "");
                             phoneNumber = await pref.getString("phone", "");
                             balance = await pref.getString("balance", "");

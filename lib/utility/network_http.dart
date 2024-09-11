@@ -173,6 +173,13 @@ class NetworkHttp {
     debugPrint("responce  ${responce.body}");
     return json.decode(responce.body);
   }
+  userData() async {
+    final responce = await http.get(Uri.parse("${baseUrl}profile"),
+        headers: headers);
+    debugPrint("${baseUrl}profile");
+    debugPrint("responce  ${responce.body}");
+    return json.decode(responce.body);
+  }
 
   pendingTicket() async {
     final responce = await http

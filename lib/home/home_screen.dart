@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:thai_lottery/faq/faq_screen.dart';
 import 'package:thai_lottery/home/create_ticket.dart';
 import 'package:thai_lottery/home/draw_results.dart';
@@ -18,8 +19,12 @@ import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../local/app_langugage_provider.dart';
+import '../local/app_localizations.dart';
 import '../main.dart';
+import '../model/usar_data_Model.dart';
 import '../utility/progressdialog_custom.dart';
+import '../utility/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,17 +40,21 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
   late int thumselected = 0;
   late PersistentTabController _controller;
-
+  late AppLanguageProvider appLanguage;
   late final WebViewController webcontroller;
   NetworkHttp networkHtttp = NetworkHttp();
+  SessionManager pref = SessionManager();
   late AllLottery allLottery;
+  late UsarDataModel usarDataModel;
   String url = 'https://www.google.co.in/';
   bool _isLoading = true;
+
 
   @override
   void initState() {
     print("---------------");
     getData();
+    userData();
 
     _controller = PersistentTabController(initialIndex: 0);
     pageController = PageController(initialPage: selectedIndex);
@@ -58,6 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
     allLottery = AllLottery.fromJson(ref);
     _isLoading = false;
     setState(() {});
+  }
+  userData()async{
+    Map<String, dynamic> ref = await networkHtttp.userData();
+    usarDataModel = UsarDataModel.fromJson(ref);
+    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
+    pref.setString(
+        "balance", usarDataModel.data!.balance.toString());
+    currncy = await pref.getString("country", "");
+    balance = await pref.getString("balance", "");
   }
 
   wenload() {
@@ -84,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    appLanguage = Provider.of<AppLanguageProvider>(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         systemNavigationBarColor: navigationBarColor,
@@ -119,8 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
-                    "Wallet funds",
+                   Text(
+                    AppLocalizations.of(context)!.translate("Wallet funds")!,
                     style: TextStyle(
                       fontSize: 8,
                       fontWeight: FontWeight.w600,
@@ -395,9 +414,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               topRight: Radius.circular(20),
                                               bottomRight: Radius.circular(20)),
                                         ),
-                                        child: const Center(
+                                        child:  Center(
                                           child: Text(
-                                            "PRIZES",
+                        AppLocalizations.of(context)!.translate("PRIZES")!,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12),

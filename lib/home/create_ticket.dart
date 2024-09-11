@@ -634,7 +634,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                 height: 30,
               ),
               const Text(
-                "You have successfully purchased 2 Tickets",
+                "You have successfully purchased Tickets",
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,

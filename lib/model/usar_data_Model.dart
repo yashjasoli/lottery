@@ -1,11 +1,11 @@
-class MonayModel {
+class UsarDataModel {
   bool? status;
   Data? data;
   String? message;
 
-  MonayModel({this.status, this.data, this.message});
+  UsarDataModel({this.status, this.data, this.message});
 
-  MonayModel.fromJson(Map<String, dynamic> json) {
+  UsarDataModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
     message = json['message'];
