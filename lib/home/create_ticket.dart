@@ -6,6 +6,7 @@ import 'package:thai_lottery/home/home_screen.dart';
 import 'package:thai_lottery/payment/deposite_screen.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/network_http.dart';
+import 'package:thai_lottery/utility/no_data.dart';
 
 import '../main.dart';
 import '../model/lottery_details_model.dart';
@@ -61,7 +62,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
 
           if (remainingTime.isNegative) {
             timer.cancel();
-            showTimeCompletedDialog();  // Show dialog when time is complete
+            showTimeCompletedDialog(); // Show dialog when time is complete
           }
         });
       });
@@ -107,7 +108,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pop();  // Close the dialog
+                  Navigator.of(context).pop(); // Close the dialog
                 },
                 child: Container(
                   height: 40,
@@ -142,31 +143,36 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       // appBar: AppBars(),
       // drawer: drower(),
       body: _isLoading == true
           ? progressdialog_custom()
-          : SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Lottery Info
-                    _buildLotteryInfo(),
-                    const SizedBox(height: 20),
-                    // Next Draw Info
-                    _buildNextDrawInfo(),
-                    const SizedBox(height: 20),
-                    // Ticket Generation Section
-                    _buildTicketGenerationSection(),
-                    const SizedBox(height: 20),
-                    _buildBuyNowButton(),
-                    const SizedBox(height: 50),
-                  ],
+          : lotteryDetailsModel.status == false
+              ? Center(
+                  child: NoDataAvaible(),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Lottery Info
+                        _buildLotteryInfo(),
+                        const SizedBox(height: 20),
+                        // Next Draw Info
+                        _buildNextDrawInfo(),
+                        const SizedBox(height: 20),
+                        // Ticket Generation Section
+                        _buildTicketGenerationSection(),
+                        const SizedBox(height: 20),
+                        _buildBuyNowButton(),
+                        const SizedBox(height: 50),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
     );
   }
 
@@ -264,7 +270,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             ),
           ),
           const SizedBox(height: 8),
-           Text(
+          Text(
             "Friday, ${lotteryDetailsModel.data!.drawDate}",
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
@@ -331,8 +337,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             child: _buildTicketList(),
           ),
           const SizedBox(height: 20),
-           Text(
-            "1 Draw With ${tickets.length} Tickets: ${tickets.length} x 80\nTotal Amount: ${tickets.length*80}",
+          Text(
+            "1 Draw With ${tickets.length} Tickets: ${tickets.length} x ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}\nTotal Amount: ${tickets.length * (currncy == "THB" ?  80 : 198.79)}",
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
           ),
@@ -400,11 +406,12 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   }
 
   Widget _buildTicketHeader() {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-       // Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
-        Text("Price: ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}  ", style: TextStyle(color: Colors.white)),
+        // Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
+        Text("Price: ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}  ",
+            style: TextStyle(color: Colors.white)),
       ],
     );
   }
@@ -638,7 +645,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeScreen()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 child: Container(
                   height: 40,
@@ -703,7 +711,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DepositeScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DepositeScreen()));
                 },
                 child: Container(
                   height: 40,

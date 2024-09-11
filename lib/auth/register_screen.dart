@@ -311,8 +311,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 "balance", loginModel.data!.balance.toString());
                             pref.setString(
                                 "phone", loginModel.data!.mobileNo.toString());
-                            pref.setString(
-                                "country", loginModel.data!.country.toString());
+                            pref.setString("country", loginModel.data!.country.toString()  == "India" ? "INR" : "THR");
 
                             userName = await pref.getString("username", "");
                             phoneNumber = await pref.getString("phone", "");

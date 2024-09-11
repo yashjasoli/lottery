@@ -28,6 +28,9 @@ class _TicketScreenState extends State<TicketScreen> {
   }
 
   getData() async {
+    setState(() {
+      _isLoading = true;
+    });
     Map<String, dynamic> data = await networkHtttp.allTicket();
     _ticketModel = allTicketModel.fromJson(data);
     _isLoading = false;
@@ -41,128 +44,130 @@ class _TicketScreenState extends State<TicketScreen> {
       drawer: const drower(),
       body: _isLoading == true
           ? progressdialog_custom()
-          : Column(
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Center(
-                  child: Text(
-                    'Tickets History',
-                    style: GoogleFonts.aclonica(
-                        textStyle: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                            color: textcolor_cust2)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: Accordion(
-                    maxOpenSections: 1,
-                    headerBackgroundColorOpened: Colors.black,
-                    scaleWhenAnimating: true,
-                    openAndCloseAnimation: true,
-                    headerPadding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 15),
-                    children: _ticketModel.data!.map((ticket) {
-                      return AccordionSection(
-                        isOpen: false,
-                        rightIcon: const SizedBox(),
-                        contentBorderColor: toolbarcolor_lang,
-                        headerBackgroundColor: toolbarcolor_lang,
-                        headerBackgroundColorOpened: toolbarcolor_lang,
-                        contentBackgroundColor: toolbarcolor_lang,
-                        header: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Ticket No.",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: primarycolor_cust),
-                            ),
-                            Text(
-                              ticket.ticketNumber.toString(),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: primarycolor_cust),
-                            ),
-                          ],
-                        ),
-                        content: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            final itemText = [
-                              {
-                                "label": "Lottery Name",
-                                "value": ticket.lotteryId!.name
-                              },
-                              {
-                                "label": "Price",
-                                "value": ticket.lotteryId!.price
-                              },
-                              {"label": "Buy Date", "value": "20-09-2024"},
-                              {"label": "Draw Date", "value": "20-09-2024"},
-                              {"label": "Result", "value": ticket.status}
-                            ][index];
-
-                            return Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      itemText["label"]!.toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10,
-                                          color: primarycolor_cust),
-                                    ),
-                                    Text(
-                                      itemText["value"]!.toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 10,
-                                          color:
-                                              itemText["label"] == "Result" &&
-                                                      itemText["value"] == "win"
-                                                  ? Colors.green
-                                                  : primarycolor_cust),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: 1,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                        contentHorizontalPadding: 20,
-                        contentBorderWidth: 1,
-                        headerBorderRadius: 20,
-                        contentBorderRadius: 20,
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ],
+          : RefreshIndicator(child: Column(
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Center(
+            child: Text(
+              'Tickets History',
+              style: GoogleFonts.aclonica(
+                  textStyle: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      color: textcolor_cust2)),
             ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Accordion(
+              maxOpenSections: 1,
+              headerBackgroundColorOpened: Colors.black,
+              scaleWhenAnimating: true,
+              openAndCloseAnimation: true,
+              headerPadding: const EdgeInsets.symmetric(
+                  vertical: 15, horizontal: 15),
+              children: _ticketModel.data!.map((ticket) {
+                return AccordionSection(
+                  isOpen: false,
+                  rightIcon: const SizedBox(),
+                  contentBorderColor: toolbarcolor_lang,
+                  headerBackgroundColor: toolbarcolor_lang,
+                  headerBackgroundColorOpened: toolbarcolor_lang,
+                  contentBackgroundColor: toolbarcolor_lang,
+                  header: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Ticket No.",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: primarycolor_cust),
+                      ),
+                      Text(
+                        ticket.ticketNumber.toString(),
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: primarycolor_cust),
+                      ),
+                    ],
+                  ),
+                  content: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      final itemText = [
+                        {
+                          "label": "Lottery Name",
+                          "value": ticket.lotteryId?.name ?? ""
+                        },
+                        {
+                          "label": "Price",
+                          "value": ticket.lotteryId?.price ?? ""
+                        },
+                        {"label": "Buy Date", "value": "20-09-2024"},
+                        {"label": "Draw Date", "value": "20-09-2024"},
+                        {"label": "Result", "value": ticket.status}
+                      ][index];
+
+                      return Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                itemText["label"]!.toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 10,
+                                    color: primarycolor_cust),
+                              ),
+                              Text(
+                                itemText["value"]!.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 10,
+                                    color:
+                                    itemText["label"] == "Result" &&
+                                        itemText["value"] == "win"
+                                        ? Colors.green
+                                        : primarycolor_cust),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            height: 1,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  contentHorizontalPadding: 20,
+                  contentBorderWidth: 1,
+                  headerBorderRadius: 20,
+                  contentBorderRadius: 20,
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ), onRefresh: ()async{
+            getData();
+      }),
     );
   }
 }

@@ -17,7 +17,6 @@ class WithdrowHistory extends StatefulWidget {
 }
 
 class _WithdrowHistoryState extends State<WithdrowHistory> {
-
   bool isLoading = true;
   NetworkHttp networkHtttp = NetworkHttp();
   late DepositHistoryModel depositHistoryModel;
@@ -29,6 +28,9 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
   }
 
   getdata() async {
+    setState(() {
+      isLoading = true;
+    });
     Map<String, dynamic> data = await networkHtttp.withdrawHistory();
     depositHistoryModel = DepositHistoryModel.fromJson(data);
     isLoading = false;
@@ -41,30 +43,44 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
       backgroundColor: Colors.white,
       appBar: AppBars(),
       drawer: drower(),
-      body:isLoading == true
+      body: isLoading == true
           ? progressdialog_custom()
-          : SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 50,),
-            Text('Withdraw History',style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
-            SizedBox(height: 10,),
-            depositHistoryModel.data!.length < 1 ? Center(child: NoDataAvaible()) : ListView.builder(
-                itemCount: depositHistoryModel.data!.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Container(
-                      decoration: BoxDecoration(
-                        color: toolbarcolor_lang,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.all(18),
-                      margin: const EdgeInsets.only(top: 8),
-                      child: Column(
-                        children: [
-                          /*Row(
+          : RefreshIndicator(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Text(
+                      'Withdraw History',
+                      style: GoogleFonts.aclonica(
+                          textStyle: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400,
+                              color: textcolor_cust2)),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    depositHistoryModel.data!.length < 1
+                        ? Center(child: NoDataAvaible())
+                        : ListView.builder(
+                            itemCount: depositHistoryModel.data!.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Container(
+                                  decoration: BoxDecoration(
+                                    color: toolbarcolor_lang,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  padding: const EdgeInsets.all(18),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  child: Column(
+                                    children: [
+                                      /*Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text("Gateway",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 10,color: primarycolor_cust),),
@@ -77,47 +93,85 @@ class _WithdrowHistoryState extends State<WithdrowHistory> {
                             color: Colors.white,
                           ),
                           SizedBox(height: 15,),*/
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text("Amount",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 10,color: primarycolor_cust),),
-                              Text(depositHistoryModel.data![index].amount.toString(),style: TextStyle(fontWeight: FontWeight.w500,fontSize: 10,color: primarycolor_cust),),
-                            ],
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            height: 1,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 15,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text("Status",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 10,color: primarycolor_cust),),
-
-                              Container(
-                                height: 25,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Color(0xffEDF7EE),
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.green)
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text(
+                                            "Amount",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 10,
+                                                color: primarycolor_cust),
+                                          ),
+                                          Text(
+                                            depositHistoryModel
+                                                .data![index].amount
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 10,
+                                                color: primarycolor_cust),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Container(
+                                        height: 1,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text(
+                                            "Status",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 10,
+                                                color: primarycolor_cust),
+                                          ),
+                                          Container(
+                                            height: 25,
+                                            padding: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffEDF7EE),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.green)),
+                                            child: Center(
+                                              child: Text(
+                                                depositHistoryModel
+                                                    .data![index].status!
+                                                    .toUpperCase(),
+                                                style: TextStyle(
+                                                    color: primarycolor_cust,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                child: Center(
-                                  child: Text(depositHistoryModel.data![index].status!.toUpperCase(), style: TextStyle(color: primarycolor_cust,fontSize: 10,fontWeight: FontWeight.w400),),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-
-                    ),
-                  );
-                }),
-          ],
-        ),
-      ),
+                              );
+                            }),
+                  ],
+                ),
+              ),
+              onRefresh: () async {
+                getdata();
+              },
+            ),
     );
   }
 }

@@ -230,7 +230,7 @@ class _drowerState extends State<drower> {
                   ),
                 ),
                 title: const Text(
-                  'CURRNCY: THB & IND',
+                  'CURRNCY: THB & INR',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

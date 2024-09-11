@@ -192,10 +192,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () async {
 
                         if (phoneController.text.isEmpty ||
-                            ischeck == false ||
                             passwordController.text.isEmpty) {
                           alert_success().alertSuccess(context);
                         } else {
+                          if(ischeck == false){
+                            var snackBar = const SnackBar(
+                              content: Text("Please Select Remember Me"),
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: primarycolor_cust,
+                              hitTestBehavior: HitTestBehavior.opaque,);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }else{
                           setState(() {
                             _isLoading = true;
                           });
@@ -214,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             pref.setString(
                                 "balance", loginModel.data!.balance.toString());
                             pref.setString("phone", loginModel.data!.mobileNo.toString());
-                            pref.setString("country", loginModel.data!.country.toString());
+                            pref.setString("country", loginModel.data!.country.toString()  == "India" ? "INR" : "THR");
 
                             userName = await pref.getString("username", "");
                             phoneNumber = await pref.getString("phone", "");
@@ -227,6 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (context) => const HomeScreen()));
                             passwordController.clear();
                             phoneController.clear();
+
                           }else{
                             setState(() {
                               _isLoading = false;
@@ -238,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               hitTestBehavior: HitTestBehavior.opaque,);
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
-                        }
+                        }}
                       },
                       child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 30),

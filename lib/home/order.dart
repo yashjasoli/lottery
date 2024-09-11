@@ -26,7 +26,9 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   getData() async {
-     _isLoading = true;
+     setState(() {
+       _isLoading = true;
+     });
     Map<String, dynamic> data = await networkHtttp.pendingTicket();
     _ticketModel = allTicketModel.fromJson(data);
     _isLoading = false;
