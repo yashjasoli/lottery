@@ -335,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     Text(
-                                      "  THAI LOTTERY  ",
+                                    AppLocalizations.of(context)!.translate("  THAI LOTTERY  ")!,
                                       style: GoogleFonts.aclonica(
                                           textStyle: const TextStyle(
                                               fontWeight: FontWeight.w400,
@@ -444,9 +444,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               topLeft: Radius.circular(20),
                                               bottomLeft: Radius.circular(20)),
                                         ),
-                                        child: const Center(
+                                        child:  Center(
                                           child: Text(
-                                            "BUY NOW",
+                        AppLocalizations.of(context)!.translate("BUY NOW")!,
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w500,
@@ -493,7 +493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                             ),
-                            Text("  LATEST DRAW  ",
+                            Text(AppLocalizations.of(context)!.translate("  LATEST DRAW  ")!,
                                 style: GoogleFonts.aclonica(
                                   textStyle: const TextStyle(
                                       color: Colors.white,
@@ -524,7 +524,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        const Center(
+                         Center(
                           child: Text(
                             "Feiday, 5 July 2024",
                             style: TextStyle(
@@ -702,9 +702,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(20),
                                 border:
                                     Border.all(color: Colors.white, width: 1)),
-                            child: const Center(
+                            child:  Center(
                               child: Text(
-                                "VIEW FULL RESULTS",
+                                AppLocalizations.of(context)!.translate("VIEW FULL RESULTS")!,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,
@@ -864,7 +864,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Center(
             child: Text(
-              'Payment',
+              AppLocalizations.of(context)!.translate('Payment')!,
               style: GoogleFonts.aclonica(
                   textStyle: const TextStyle(
                       fontSize: 24,
@@ -904,7 +904,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Center(
                 child: Text(
-                  'Deposite',
+                  AppLocalizations.of(context)!.translate('Deposite')!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontSize: 24,
@@ -946,7 +946,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Center(
                 child: Text(
-                  'Withdraw',
+                  AppLocalizations.of(context)!.translate('Withdraw')!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontSize: 24,
@@ -998,9 +998,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: const Center(
+                      child:  Center(
                         child: Text(
-                          "WINNINGS AMMOUNT",
+                          AppLocalizations.of(context)!.translate("WINNINGS AMMOUNT")!,
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
@@ -1022,14 +1022,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Prices",
+                                AppLocalizations.of(context)!.translate("Prices")!,
                                 style: TextStyle(
                                     color: Colors.green,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 18),
                               ),
                               Text(
-                                "Win Amount",
+                                AppLocalizations.of(context)!.translate("Win Amount")!,
                                 style: TextStyle(
                                     color: Colors.green,
                                     fontWeight: FontWeight.w500,

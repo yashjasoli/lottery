@@ -31,7 +31,7 @@ class NetworkHttp {
   }
 
   withdraw(String amount, String utr) async {
-    final body = {"amount": amount, "UTR": utr};
+    final body = {"amount": amount, "upi_id": utr};
     final responce = await http.post(Uri.parse("${baseUrl}payment/withdraw"),
         body: body, headers: headers2);
     debugPrint(body.toString());
@@ -88,7 +88,7 @@ class NetworkHttp {
 
     // debugPrint request data and response.
     debugPrint(body.toString());
-    debugPrint("response ${responce.body}");
+    debugPrint("response ${responce.body}  -- ${responce.statusCode}");
 
     return json.decode(responce.body);
   }
@@ -127,8 +127,8 @@ class NetworkHttp {
   ticketNumber() async {
     final responce = await http
         .get(Uri.parse("${baseUrl}lottery/ticket-number"), headers: headers);
-    debugPrint("$headers");
-    debugPrint("responce ${responce.body}");
+    debugPrint(" ---------- $headers");
+    debugPrint("responce ${responce.body} --- ${responce.statusCode}");
     return json.decode(responce.body);
   }
 

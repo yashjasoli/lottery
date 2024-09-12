@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:thai_lottery/local/app_langugage_provider.dart';
 import 'package:thai_lottery/splash/splash_screen.dart';
 
-import 'local/app_langugage_provider.dart';
 import 'local/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 String userName = '';
 String email = '';
@@ -23,15 +24,14 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  AppLanguageProvider? appLanguage;
+  final AppLanguageProvider appLanguage;
 
   MyApp({super.key, required this.appLanguage});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => appLanguage!,
+      create: (context) => appLanguage,
       child: Consumer<AppLanguageProvider>(
         builder: (context, model, child) {
           return MaterialApp(
@@ -42,12 +42,18 @@ class MyApp extends StatelessWidget {
               fontFamily: GoogleFonts.poppins().fontFamily,
             ),
             debugShowCheckedModeBanner: false,
+            locale: model.appLocal, // Use the locale from AppLanguageProvider
             supportedLocales: const [
               Locale('en', 'US'),
               Locale('ru', 'RU'),
+              Locale('th', 'TH'),
+              Locale('zh', 'CN'),
             ],
             localizationsDelegates: const [
               AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
             home: SplashScreen(),
           );

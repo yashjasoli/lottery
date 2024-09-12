@@ -11,7 +11,9 @@ import 'package:thai_lottery/utility/no_data.dart';
 import '../main.dart';
 import '../model/lottery_details_model.dart';
 import '../model/ticket_number_model.dart';
+import '../model/usar_data_Model.dart';
 import '../utility/progressdialog_custom.dart';
+import '../utility/shared_preferences.dart';
 
 class TicketGenerateScreen extends StatefulWidget {
   String id;
@@ -32,13 +34,22 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   late AllTicketModel allTicketModel;
   List<String> ticketNumber = [];
   List<String> tickets = List.generate(1, (index) => "");
-
+  SessionManager pref = SessionManager();
+  late UsarDataModel usarDataModel;
   @override
   void initState() {
     super.initState();
     getData();
   }
-
+  userData()async{
+    Map<String, dynamic> ref = await networkHtttp.userData();
+    usarDataModel = UsarDataModel.fromJson(ref);
+    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
+    pref.setString(
+        "balance", usarDataModel.data!.balance.toString());
+    currncy = await pref.getString("country", "");
+    balance = await pref.getString("balance", "");
+  }
   getData() async {
     try {
       Map<String, dynamic> ref = await networkHtttp.lotteryDetails(widget.id);
@@ -80,6 +91,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16.0))),
@@ -348,24 +360,54 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   }
 
   Widget _buildBuyNowButton() {
+    bool isbuy = false;
+    isbuy = tickets.any(
+            (entry) =>
+        entry == "");
     return GestureDetector(
-      onTap: ticketNumber.isEmpty
+      onTap: isbuy != false
           ? null
           : () async {
-              Map<String, dynamic> ref =
-                  await networkHtttp.buyLottery(widget.id, tickets);
-              print(ref['status']);
-              if (ref['status'] == false) {
-                showClecel();
+        for (var i = 0; i < tickets.length; i++) {
+          if (tickets[i] != "") {
+            try {
+              var response = await networkHtttp.buyLottery(widget.id, tickets);
+              print("Response from buyLottery: $response");
+
+              if (response != null && response.isNotEmpty) {
+              //  Map<String, dynamic> ref = jsonDecode(response);
+                print(response['status']);
+                if (response['status'] == false) {
+                  showClecel();
+                } else {
+                  userData();
+                  showSuccess();
+                }
               } else {
-                showSuccess();
+                print("Empty response from the server");
               }
-            },
+            } catch (e) {
+              print("Error: $e");
+            }
+          } else {
+            var snackBar = SnackBar(
+              content: Text("Generate ticket number ${i + 1}"),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: primarycolor_cust,
+              hitTestBehavior: HitTestBehavior.opaque,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            print("Ticket at index $i generated: ${tickets[i]}");
+            setState(() {});
+          }
+        }
+      },
+
       child: Container(
         height: 50,
         margin: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
-          color: ticketNumber.isEmpty
+          color: isbuy != false
               ? Colors.green
                   .withOpacity(0.5) // Grayed-out color when tickets is empty.
               : Colors.green, // Full color when tickets is not empty.

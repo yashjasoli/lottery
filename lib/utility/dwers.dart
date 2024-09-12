@@ -498,7 +498,7 @@ class _drowerState extends State<drower> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        appLanguage.changeLanguage(const Locale("en"));
+                        _changeLanguage(context, Locale("en"));
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -525,7 +525,7 @@ class _drowerState extends State<drower> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        appLanguage.changeLanguage(const Locale("ru"));
+                        _changeLanguage(context, Locale("th"));
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -554,19 +554,25 @@ class _drowerState extends State<drower> {
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: primarycolor_cust,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "RUSSIAN",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
+                    child: GestureDetector(
+                      onTap: () {
+                        _changeLanguage(context, Locale("ru"));
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: primarycolor_cust,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "RUSSIAN",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14),
+                          ),
                         ),
                       ),
                     ),
@@ -575,19 +581,25 @@ class _drowerState extends State<drower> {
                     width: 10,
                   ),
                   Expanded(
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: primarycolor_cust,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "CHINESE",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
+                    child: GestureDetector(
+                      onTap: () {
+                        _changeLanguage(context, Locale("zh"));
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: primarycolor_cust,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "CHINESE",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14),
+                          ),
                         ),
                       ),
                     ),
@@ -600,4 +612,8 @@ class _drowerState extends State<drower> {
       },
     );
   }
+  void _changeLanguage(BuildContext context, Locale newLocale) {
+    Provider.of<AppLanguageProvider>(context, listen: false).changeLanguage(newLocale);
+  }
+
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:thai_lottery/auth/login_screnn.dart';
+import 'package:thai_lottery/local/app_localizations.dart';
 import 'package:thai_lottery/utility/colors.dart';
+
+import '../local/app_langugage_provider.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
@@ -35,17 +39,20 @@ class _LanguageScreenState extends State<LanguageScreen> {
             height: 50,
           ),
           Text(
-            "Language",
+            AppLocalizations.of(context)!.translate("Language")!,
             style: GoogleFonts.breeSerif(
                 textStyle: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
                     color: font_color_cust)),
           ),
-          const Text(
-            "Select your app language",
+          Text(
+            AppLocalizations.of(context)!
+                .translate("Select your app language")!,
             style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff8B9199)),
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff8B9199)),
           ),
           const SizedBox(
             height: 50,
@@ -56,6 +63,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               GestureDetector(
                 onTap: () {
                   selectLanguage = "English";
+                  _changeLanguage(context, Locale('en'));
                   setState(() {});
                 },
                 child: Container(
@@ -68,7 +76,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(
-                      "English",
+                      AppLocalizations.of(context)!.translate("English")!,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
@@ -83,6 +91,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               GestureDetector(
                 onTap: () {
                   selectLanguage = "Thai";
+                  _changeLanguage(context, Locale('th'));
                   setState(() {});
                 },
                 child: Container(
@@ -95,7 +104,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(
-                      "Thai",
+                      AppLocalizations.of(context)!.translate("Thai")!,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -117,6 +126,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               GestureDetector(
                 onTap: () {
                   selectLanguage = "Russian";
+                  _changeLanguage(context, Locale('ru'));
                   setState(() {});
                 },
                 child: Container(
@@ -129,7 +139,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(
-                      "Russian",
+                      AppLocalizations.of(context)!.translate("Russian")!,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -143,6 +153,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               GestureDetector(
                 onTap: () {
                   selectLanguage = "Chinese";
+                  _changeLanguage(context, Locale('zh'));
                   setState(() {});
                 },
                 child: Container(
@@ -155,7 +166,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(
-                      "Chinese",
+                      AppLocalizations.of(context)!.translate("Chinese")!,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -175,7 +186,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false);
+              (route) => false);
         },
         child: Container(
           height: 50,
@@ -183,9 +194,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
           decoration: BoxDecoration(
               color: primarycolor_cust,
               borderRadius: BorderRadius.circular(10)),
-          child: const Center(
+          child: Center(
             child: Text(
-              "Next",
+              AppLocalizations.of(context)!.translate("Next")!,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -195,5 +206,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
         ),
       ),
     );
+  }
+  void _changeLanguage(BuildContext context, Locale newLocale) {
+    Provider.of<AppLanguageProvider>(context, listen: false).changeLanguage(newLocale);
   }
 }

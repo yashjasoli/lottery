@@ -20,20 +20,13 @@ class AppLanguageProvider extends ChangeNotifier {
     return Null;
   }
 
-  void changeLanguage(Locale type) async {
-    var prefs = await SharedPreferences.getInstance();
-    if (_appLocale == type) {
-      return;
-    }
-    if (type == const Locale("ru")) {
-      _appLocale = const Locale("ru");
-      await prefs.setString('language_code', 'ru');
-      await prefs.setString('countryCode', 'Ru');
-    } else {
-      _appLocale = const Locale("en");
-      await prefs.setString('language_code', 'en');
-      await prefs.setString('countryCode', 'US');
-    }
-    notifyListeners();
-  }
+   void changeLanguage(Locale type) async {
+     var prefs = await SharedPreferences.getInstance();
+     if (_appLocale == type) {
+       return;
+     }
+     _appLocale = type; // Directly assigning the new locale
+     await prefs.setString('language_code', type.languageCode);
+     notifyListeners(); // Notify listeners to rebuild the UI
+   }
 }

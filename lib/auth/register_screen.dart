@@ -163,6 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               color: dark_grey_background_cust,
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: phoneController,
                             style: const TextStyle(
                                 color: seconderycolor_cust,
@@ -311,7 +312,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 "balance", loginModel.data!.balance.toString());
                             pref.setString(
                                 "phone", loginModel.data!.mobileNo.toString());
-                            pref.setString("country", loginModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
+                            pref.setString("country", loginModel.data!.currencyCode.toString()  != "764" ? "INR" : "THB");
 
                             userName = await pref.getString("username", "");
                             phoneNumber = await pref.getString("phone", "");
@@ -324,6 +325,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 builder: (context) => const HomeScreen()));
                             passwordController.clear();
                             phoneController.clear();
+                          }else{
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            var snackBar = const SnackBar(
+                              content: Text("Email or Phone Number Already Registered"),
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: primarycolor_cust,
+                              hitTestBehavior: HitTestBehavior.opaque,);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         }
                       },
