@@ -8,6 +8,8 @@ import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/no_data.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
+import '../local/app_localizations.dart';
+
 class DepositHistory extends StatefulWidget {
   const DepositHistory({super.key});
 
@@ -52,7 +54,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                       height: 50,
                     ),
                     Text(
-                      'Deposite History',
+                      AppLocalizations.of(context)!.translate('Deposit History')!,
                       style: GoogleFonts.aclonica(
                           textStyle: const TextStyle(
                               fontSize: 24,
@@ -113,8 +115,8 @@ class _DepositHistoryState extends State<DepositHistory> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          const Text(
-                                            "Amount",
+                                           Text(
+                                             AppLocalizations.of(context)!.translate( "Amount")!,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 10,
@@ -145,8 +147,8 @@ class _DepositHistoryState extends State<DepositHistory> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          const Text(
-                                            "Status",
+                                           Text(
+                                             AppLocalizations.of(context)!.translate("Status")!,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 10,

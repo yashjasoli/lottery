@@ -88,5 +88,20 @@
   "Please Enter Data": "Пожалуйста, введите данные",
   "Thai Lottery": "Тайская лотерея",
   "Ticket No.": "Номер билета",
-  "  LATEST DRAW  ": "  ПОСЛЕДНИЙ РОЗЫГРЫШ  "
+  "  LATEST DRAW  ": "  ПОСЛЕДНИЙ РОЗЫГРЫШ  ",
+  "Email or Phone Number Already Registered": "Электронная почта или номер телефона уже зарегистрированы",
+  "Deposit History": "История депозитов",
+  "Withdrawal History": "История выводов",
+  "CURRENCY": "ВАЛЮТА",
+  "Please select your currency": "Пожалуйста, выберите вашу валюту",
+  "LANGUAGE": "ЯЗЫК",
+  "Password": "Пароль",
+  "Please select your language": "Пожалуйста, выберите ваш язык",
+  "ENGLISH": "АНГЛИЙСКИЙ",
+  "THAI": "ТАЙСКИЙ",
+  "RUSSIAN": "РУССКИЙ",
+    "CHINESE": "КИТАЙСКИЙ",
+  "MAIN DRAW": "ОСНОВНОЙ РОЗЫГРЫШ",
+    "TOTAL PRIZES:": "ОБЩЕЕ КОЛИЧЕСТВО ПРИЗОВ:",
+    "No.": "Нет."
 }

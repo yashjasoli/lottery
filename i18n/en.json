@@ -88,5 +88,21 @@
     "Please Enter Data": "Please Enter Data",
     "Thai Lottery": "Thai Lottery",
     "Ticket No.": "Ticket No.",
-    "  LATEST DRAW  ": "  LATEST DRAW  "
+    "  LATEST DRAW  ": "  LATEST DRAW  ",
+    "Email or Phone Number Already Registered": "Email or Phone Number Already Registered",
+    "Deposit History": "Deposit History",
+    "Withdrawal History": "Withdrawal History",
+    "CURRENCY": "CURRENCY",
+    "Please select your currency": "Please select your currency",
+    "LANGUAGE": "LANGUAGE",
+    "Password": "Password",
+    "Please select your language": "Please select your language",
+    "ENGLISH": "ENGLISH",
+    "THAI": "THAI",
+    "RUSSIAN": "RUSSIAN",
+    "CHINESE": "CHINESE",
+    "MAIN DRAW": "MAIN DRAW",
+    "TOTAL PRIZES:" : "TOTAL PRIZES:",
+    "No.": "No."
+
 }

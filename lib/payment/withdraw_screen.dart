@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/home/home_screen.dart';
+import 'package:thai_lottery/local/app_localizations.dart';
 import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
@@ -39,7 +40,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               ),
               Center(
                 child: Text(
-                  'Withdraw',
+                  AppLocalizations.of(context)!.translate('Withdraw')!,
                   style: GoogleFonts.aclonica(
                       textStyle: TextStyle(
                           fontSize: 24,
@@ -60,7 +61,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   controller: UTRController,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: "Enter Your PromptPay / UPI ID",
+                      hintText: AppLocalizations.of(context)!.translate("Enter Your PromptPay / UPI ID"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -82,7 +83,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: "Enter Amount",
+                      hintText: AppLocalizations.of(context)!.translate("Enter Amount"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -200,9 +201,9 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
             alert_success().alertSuccess(context);
           } else if (double.parse(balance) <
               double.parse(amountController.text)) {
-            print("Please velid amount");
+            print(AppLocalizations.of(context)!.translate("Please velid amount"));
             ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Please Enter valid amount")));
+                 SnackBar(content: Text(AppLocalizations.of(context)!.translate("Please Enter valid amount")!)));
           } else {
             await networkHtttp.withdraw(
                 amountController.text, UTRController.text);
@@ -220,7 +221,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Text(
-              "Withdraw NOW",
+    AppLocalizations.of(context)!.translate( "Withdraw NOW")!,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

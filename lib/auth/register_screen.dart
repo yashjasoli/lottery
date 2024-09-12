@@ -12,6 +12,8 @@ import 'package:thai_lottery/utility/progressdialog_custom.dart';
 import 'package:thai_lottery/utility/requad_box.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
+import '../local/app_localizations.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -56,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Navigator.pop(context);
             },
             child: Text(
-              "SIGN IN",
+              AppLocalizations.of(context)!.translate("SIGN IN")!,
               style: GoogleFonts.openSans(
                 textStyle: const TextStyle(
                   color: Color(0xff6459A0),
@@ -75,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "REGISTER",
+                    AppLocalizations.of(context)!.translate("REGISTER")!,
                       style: GoogleFonts.breeSerif(
                           textStyle: const TextStyle(
                               fontSize: 24,
@@ -97,13 +99,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: seconderycolor_cust,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400),
-                            hintText: "Enter Your Full Name",
+                            hintText: AppLocalizations.of(context)!.translate("Enter Your Full Name")!,
                             border: InputBorder.none),
                       ),
                     ),
@@ -122,9 +124,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: seconderycolor_cust,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText: "Enter Your Email",
+                            hintText: AppLocalizations.of(context)!.translate("Enter Your Email")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -169,9 +171,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 color: seconderycolor_cust,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400),
-                            decoration: const InputDecoration(
+                            decoration:  InputDecoration(
                                 contentPadding: EdgeInsets.zero,
-                                hintText: "Enter Your Mobile Number",
+                                hintText: AppLocalizations.of(context)!.translate("Enter Your Mobile Number")!,
                                 hintStyle: TextStyle(
                                     color: seconderycolor_cust,
                                     fontSize: 12,
@@ -195,9 +197,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: seconderycolor_cust,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText: "Enter Your Thai ID or Passport Number",
+                            hintText: AppLocalizations.of(context)!.translate("Enter Your Thai ID or Passport Number")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -219,10 +221,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: seconderycolor_cust,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText:
-                                "Enter Your PromptPay Number or Gpay Number",
+                            AppLocalizations.of(context)!.translate("Enter Your PromptPay Number or Gpay Number")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -251,9 +253,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: seconderycolor_cust,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400),
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                   contentPadding: EdgeInsets.zero,
-                                  hintText: "Enter Your Password",
+                                  hintText: AppLocalizations.of(context)!.translate("Enter Your Password")!,
                                   hintStyle: TextStyle(
                                       color: seconderycolor_cust,
                                       fontSize: 12,
@@ -329,8 +331,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             setState(() {
                               _isLoading = false;
                             });
-                            var snackBar = const SnackBar(
-                              content: Text("Email or Phone Number Already Registered"),
+                            var snackBar =  SnackBar(
+                              content: Text(AppLocalizations.of(context)!.translate("Email or Phone Number Already Registered")!),
                               behavior: SnackBarBehavior.floating,
                               backgroundColor: primarycolor_cust,
                               hitTestBehavior: HitTestBehavior.opaque,);
@@ -344,9 +346,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: BoxDecoration(
                               color: primarycolor_cust,
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
-                              "CREATE ACCOUNT",
+                              AppLocalizations.of(context)!.translate("CREATE ACCOUNT")!,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,

@@ -6,6 +6,7 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../local/app_localizations.dart';
 import '../utility/shared_preferences.dart';
 
 class PersonalInformation extends StatefulWidget {
@@ -35,10 +36,10 @@ class _PersonalInformationState extends State<PersonalInformation> {
             children: <Widget>[
               const SizedBox(height: 50,),
               Center(
-                child: Text('Personal Information',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
+                child: Text(AppLocalizations.of(context)!.translate('Personal Information')!,style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
               ),
               const SizedBox(height: 30,),
-              const Text("Your Name",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+               Text(AppLocalizations.of(context)!.translate("Your Name")!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
               const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
@@ -66,7 +67,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 ),
               ),
               const SizedBox(height: 15,),
-              const Text("Phone Number",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+               Text(AppLocalizations.of(context)!.translate("Phone Number")!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
               const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
@@ -94,7 +95,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 ),
               ),
               const SizedBox(height: 15,),
-              const Text("Email Address",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
+               Text(AppLocalizations.of(context)!.translate("Email Address")!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: textcolor_cust2),),
               const SizedBox(height: 8,),
               GestureDetector(
                 child: Container(
@@ -122,7 +123,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 ),
               ),
               const SizedBox(height: 15,),
-              const Text("If you want to change your phone and email address, please contact with support.",style: TextStyle(
+               Text(AppLocalizations.of(context)!.translate("If you want to change your phone and email address, please contact with support.")!,style: TextStyle(
                 color: greycolor_cust,
                 fontWeight: FontWeight.w400,
                 fontSize: 10
@@ -152,9 +153,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
              color: primarycolor_cust,
              borderRadius: BorderRadius.circular(10)
          ),
-         child: const Center(
+         child:  Center(
            child: Text(
-             "Save Changes",
+    AppLocalizations.of(context)!.translate("Save Changes")!,
              style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 18),
            ),
          ),

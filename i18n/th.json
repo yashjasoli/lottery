@@ -88,5 +88,20 @@
   "Please Enter Data": "กรุณากรอกข้อมูล",
   "Thai Lottery": "ลอตเตอรีไทย",
   "Ticket No.": "หมายเลขตั๋ว",
-  "  LATEST DRAW  ": "  การจับรางวัลล่าสุด  "
+  "  LATEST DRAW  ": "  การจับรางวัลล่าสุด  ",
+  "Email or Phone Number Already Registered": "อีเมลหรือหมายเลขโทรศัพท์ได้ลงทะเบียนแล้ว",
+    "Deposit History": "ประวัติการฝากเงิน",
+  "Withdrawal History": "ประวัติการถอนเงิน",
+  "CURRENCY": "สกุลเงิน",
+  "Please select your currency": "กรุณาเลือกสกุลเงินของคุณ",
+  "LANGUAGE": "ภาษา",
+  "Password": "รหัสผ่าน",
+  "Please select your language": "กรุณาเลือกภาษาของคุณ",
+  "ENGLISH": "อังกฤษ",
+    "THAI": "ไทย",
+    "RUSSIAN": "รัสเซีย",
+    "CHINESE": "จีน",
+  "MAIN DRAW": "การจับรางวัลหลัก",
+    "TOTAL PRIZES:" : "รางวัลทั้งหมด:",
+    "No.": "ไม่."
 }

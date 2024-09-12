@@ -13,6 +13,7 @@ import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
 import '../local/app_langugage_provider.dart';
+import '../local/app_localizations.dart';
 
 class drower extends StatefulWidget {
   const drower({super.key});
@@ -117,8 +118,8 @@ class _drowerState extends State<drower> {
                     color: primarycolor_cust,
                   ),
                 ),
-                title: const Text(
-                  'My Account',
+                title: Text(
+                  AppLocalizations.of(context)!.translate('My Account')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -142,8 +143,8 @@ class _drowerState extends State<drower> {
                     scale: 10,
                   ),
                 ),
-                title: const Text(
-                  'Deposit History',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('Deposit History')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -166,8 +167,8 @@ class _drowerState extends State<drower> {
                     scale: 4,
                   ),
                 ),
-                title: const Text(
-                  'Withdrawal History',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('Withdrawal History')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -189,8 +190,8 @@ class _drowerState extends State<drower> {
                     scale: 4,
                   ),
                 ),
-                title: const Text(
-                  'Language',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('Language')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -202,7 +203,7 @@ class _drowerState extends State<drower> {
                   Scaffold.of(context).closeDrawer();
                 },
               ),
-              ListTile(
+             /* ListTile(
                 leading: CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
@@ -211,8 +212,8 @@ class _drowerState extends State<drower> {
                     scale: 20,
                   ),
                 ),
-                title: const Text(
-                  'Privacy Policy',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('Privacy Policy')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -222,7 +223,7 @@ class _drowerState extends State<drower> {
                 onTap: () {
                   //  Navigator.pop(context);
                 },
-              ),
+              ),*/
               ListTile(
                 leading: CircleAvatar(
                   radius: 18,
@@ -233,8 +234,8 @@ class _drowerState extends State<drower> {
                     scale: 4,
                   ),
                 ),
-                title: const Text(
-                  'CURRNCY: THB & INR',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('CURRNCY: THB & INR')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -256,8 +257,8 @@ class _drowerState extends State<drower> {
                     scale: 4,
                   ),
                 ),
-                title: const Text(
-                  'Tickets History',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('Tickets History')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -280,8 +281,8 @@ class _drowerState extends State<drower> {
                     color: primarycolor_cust,
                   ),
                 ),
-                title: const Text(
-                  'About Us',
+                title:  Text(
+                  AppLocalizations.of(context)!.translate('About Us')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -317,9 +318,9 @@ class _drowerState extends State<drower> {
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Center(
+              child:  Center(
                 child: Text(
-                  'LOG OUT',
+              AppLocalizations.of(context)!.translate('LOG OUT')!,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -356,9 +357,9 @@ class _drowerState extends State<drower> {
               const SizedBox(
                 height: 20,
               ),
-              const Center(
+               Center(
                   child: Text(
-                'CURRENCY',
+                      AppLocalizations.of(context)!.translate('CURRENCY')!,
                 style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.w700,
@@ -367,8 +368,8 @@ class _drowerState extends State<drower> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Please select your currency",
+               Text(
+                 AppLocalizations.of(context)!.translate("Please select your currency")!,
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
@@ -472,9 +473,9 @@ class _drowerState extends State<drower> {
               const SizedBox(
                 height: 20,
               ),
-              const Center(
+               Center(
                   child: Text(
-                'LANGUAGE',
+                      AppLocalizations.of(context)!.translate('LANGUAGE')!,
                 style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.w700,
@@ -483,8 +484,8 @@ class _drowerState extends State<drower> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Please select your language",
+               Text(
+                 AppLocalizations.of(context)!.translate("Please select your language")!,
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
@@ -507,9 +508,9 @@ class _drowerState extends State<drower> {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "ENGLISH",
+                            AppLocalizations.of(context)!.translate("ENGLISH")!,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -534,9 +535,9 @@ class _drowerState extends State<drower> {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "THAI",
+                            AppLocalizations.of(context)!.translate("THAI")!,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -565,9 +566,9 @@ class _drowerState extends State<drower> {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "RUSSIAN",
+                            AppLocalizations.of(context)!.translate("RUSSIAN")!,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -592,9 +593,9 @@ class _drowerState extends State<drower> {
                           color: primarycolor_cust,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "CHINESE",
+                            AppLocalizations.of(context)!.translate("CHINESE")!,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

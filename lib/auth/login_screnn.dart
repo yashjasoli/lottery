@@ -11,6 +11,8 @@ import 'package:thai_lottery/utility/progressdialog_custom.dart';
 import 'package:thai_lottery/utility/requad_box.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
+import '../local/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -54,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     MaterialPageRoute(builder: (context) => const RegisterScreen()));
               },
               child: Text(
-                "REGISTER",
+                AppLocalizations.of(context)!.translate("REGISTER")!,
                 style: GoogleFonts.openSans(
                     textStyle: const TextStyle(
                         color: Color(0xff6459A0),
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "SIGN IN",
+                    AppLocalizations.of(context)!.translate("SIGN IN")!,
                       style: GoogleFonts.breeSerif(
                           textStyle: const TextStyle(
                               fontSize: 24,
@@ -93,9 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: seconderycolor_cust,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText: "Enter Your Email",
+                            hintText: AppLocalizations.of(context)!.translate("Enter Your Email")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -124,9 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: seconderycolor_cust,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400),
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                   contentPadding: EdgeInsets.zero,
-                                  hintText: "Enter Your Password",
+                                  hintText: AppLocalizations.of(context)!.translate("Enter Your Password")!,
                                   hintStyle: TextStyle(
                                       color: seconderycolor_cust,
                                       fontSize: 12,
@@ -166,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                             ),
-                            const Text("Remember Me",
+                             Text(AppLocalizations.of(context)!.translate("Remember Me")!,
                                 style: TextStyle(
                                     color: Color(0xff8B9199),
                                     fontSize: 12,
@@ -176,8 +178,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Checkbox(value: va, onChanged: ),
                         TextButton(
                             onPressed: () {},
-                            child: const Text(
-                              "Forget Password",
+                            child:  Text(
+                                AppLocalizations.of(context)!.translate("Forget Password")!,
                               style: TextStyle(
                                   color: Color(0xff8B9199),
                                   fontSize: 12,
@@ -196,8 +198,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           alert_success().alertSuccess(context);
                         } else {
                           if(ischeck == false){
-                            var snackBar = const SnackBar(
-                              content: Text("Please Select Remember Me"),
+                            var snackBar =  SnackBar(
+                              content: Text(AppLocalizations.of(context)!.translate("Please Select Remember Me")!),
                               behavior: SnackBarBehavior.floating,
                               backgroundColor: primarycolor_cust,
                               hitTestBehavior: HitTestBehavior.opaque,);
@@ -239,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _isLoading = false;
                             });
                             var snackBar = SnackBar(
-                              content: Text("Invalid Email or Password"),
+                              content: Text(AppLocalizations.of(context)!.translate("Invalid Email or Password")!),
                               behavior: SnackBarBehavior.floating,
                               backgroundColor: primarycolor_cust,
                               hitTestBehavior: HitTestBehavior.opaque,);
@@ -253,9 +255,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: BoxDecoration(
                               color: primarycolor_cust,
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
-                              "Login",
+                              AppLocalizations.of(context)!.translate("Login")!,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -272,11 +274,11 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const RegisterScreen()));
         },
-        child: const SizedBox(
+        child:  SizedBox(
           height: 50,
           child: Center(
             child: Text(
-              "No account? Create Account",
+          AppLocalizations.of(context)!.translate("No account? Create Account")!,
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 14,

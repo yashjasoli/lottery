@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
   userData()async{
     Map<String, dynamic> ref = await networkHtttp.userData();
     usarDataModel = UsarDataModel.fromJson(ref);
-    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
+    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THB");
     pref.setString(
         "balance", usarDataModel.data!.balance.toString());
     currncy = await pref.getString("country", "");
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 12,
                 ),
                 SizedBox(
-                  height: 210,
+                //  height: 210,
                   // width: 500,
                   child: ListView.builder(
                       itemCount: allLottery.data!.length,

@@ -6,6 +6,8 @@ import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../local/app_localizations.dart';
+
 class SecuritySetting extends StatefulWidget {
   const SecuritySetting({super.key});
 
@@ -35,7 +37,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
               ),
               Center(
                 child: Text(
-                  'Security Setting',
+                  AppLocalizations.of(context)!.translate('Security Setting')!,
                   style: GoogleFonts.aclonica(
                       textStyle: TextStyle(
                           fontSize: 24,
@@ -47,7 +49,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
                 height: 30,
               ),
               Text(
-                "Password",
+                AppLocalizations.of(context)!.translate( "Password")!,
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -76,7 +78,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
                         fontWeight: FontWeight.w500,
                       ),
                       decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "password"),
+                          border: InputBorder.none, hintText: AppLocalizations.of(context)!.translate("Password")!),
                     ),
                   ),
                 ),
@@ -85,7 +87,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
                 height: 15,
               ),
               Text(
-                "Confirm Password",
+                AppLocalizations.of(context)!.translate("Confirm Password")!,
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -114,7 +116,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
                         fontWeight: FontWeight.w500,
                       ),
                       decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "password"),
+                          border: InputBorder.none, hintText: AppLocalizations.of(context)!.translate("Confirm Password")!),
                     ),
                   ),
                 ),
@@ -139,7 +141,7 @@ class _SecuritySettingState extends State<SecuritySetting> {
               borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Text(
-              "Save Changes",
+    AppLocalizations.of(context)!.translate("Save Changes")!,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

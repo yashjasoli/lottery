@@ -4,6 +4,8 @@ import 'package:thai_lottery/main.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
 
+import '../local/app_localizations.dart';
+
 class AppBars extends StatelessWidget implements PreferredSizeWidget {
   const AppBars({super.key});
 
@@ -44,7 +46,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "Wallet funds",
+            AppLocalizations.of(context)!.translate("Wallet funds")!,
                 style: TextStyle(
                   fontSize: 8,
                   fontWeight: FontWeight.w600,

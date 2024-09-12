@@ -13,6 +13,7 @@ class NetworkHttp {
   var headers2 = {'Authorization': 'Bearer $token'};
 
   login(String email, String password) async {
+    print(headers);
     final body = {"email": email, "password": password};
     debugPrint(body.toString());
     final responce = await http.post(Uri.parse("${baseUrl}login"), body: body);
@@ -149,6 +150,7 @@ class NetworkHttp {
   }
 
   allLottery() async {
+    print("allLottery");
     final responce = await http
         .get(Uri.parse("${baseUrl}lottery/all-lotteries"), headers: headers);
     debugPrint(headers.toString());

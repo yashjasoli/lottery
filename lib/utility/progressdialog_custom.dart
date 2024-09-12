@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../local/app_localizations.dart';
+
 class progressdialog_custom extends StatefulWidget {
     @override
     _progressdialog_customState createState() => _progressdialog_customState();
@@ -23,7 +25,7 @@ class progressdialog_custom extends StatefulWidget {
                   child: Lottie.network(
                       "https://lottie.host/9a708eae-f5b4-4bec-b20f-964fb913011a/8e86oYCOpN.json"),
                 ),
-                const Text("Please Waiting...",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),)
+                 Text(AppLocalizations.of(context)!.translate("Please Waiting...")!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),)
               ],
             ),
           ),

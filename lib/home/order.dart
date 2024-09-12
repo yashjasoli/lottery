@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/no_data.dart';
 
+import '../local/app_localizations.dart';
 import '../model/all_ticket_model.dart';
 import '../utility/network_http.dart';
 import '../utility/progressdialog_custom.dart';
@@ -48,7 +49,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     child:    Column(
             children: <Widget>[
               const SizedBox(height: 50,),
-              Text('Orders',style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
+              Text(AppLocalizations.of(context)!.translate('Orders')!,style: GoogleFonts.aclonica(textStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
               const SizedBox(height: 10,),
               _ticketModel.data!.length < 1 ? Center(child: NoDataAvaible()) : ListView.builder(
                   itemCount: _ticketModel.data!.length,
@@ -68,8 +69,8 @@ class _OrderScreenState extends State<OrderScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text(
-                                  "No.",
+                                 Text(
+                                   AppLocalizations.of(context)!.translate("No.")!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 10,
@@ -97,8 +98,8 @@ class _OrderScreenState extends State<OrderScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text(
-                                  "Lottery Name",
+                                 Text(
+                                   AppLocalizations.of(context)!.translate("Lottery Name")!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 10,
@@ -126,8 +127,8 @@ class _OrderScreenState extends State<OrderScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text(
-                                  "Tickets",
+                                 Text(
+                                   AppLocalizations.of(context)!.translate( "Tickets")!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 10,
@@ -155,8 +156,8 @@ class _OrderScreenState extends State<OrderScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text(
-                                  "Status",
+                                 Text(
+                                   AppLocalizations.of(context)!.translate("Status")!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 10,

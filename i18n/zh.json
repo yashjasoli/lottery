@@ -88,5 +88,20 @@
   "Please Enter Data": "请输入数据",
   "Thai Lottery": "泰国彩票",
   "Ticket No.": "票号",
-  "  LATEST DRAW  ": "  最新抽奖  "
+  "  LATEST DRAW  ": "  最新抽奖  ",
+  "Email or Phone Number Already Registered": "电子邮箱或电话号码已注册",
+    "Deposit History": "存款历史",
+  "Withdrawal History": "提现历史",
+  "CURRENCY": "货币",
+  "Please select your currency": "请选择您的货币",
+  "LANGUAGE": "语言",
+    "Password": "密码",
+  "Please select your language": "请选择您的语言",
+  "ENGLISH": "英语",
+    "THAI": "泰语",
+    "RUSSIAN": "俄语",
+    "CHINESE": "中文",
+  "MAIN DRAW": "主要抽奖",
+  "TOTAL PRIZES:" : "总奖品：",
+    "No.": "号码"
 }

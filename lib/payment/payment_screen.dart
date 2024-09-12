@@ -7,6 +7,8 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
 
+import '../local/app_localizations.dart';
+
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
 
@@ -33,7 +35,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             Center(
               child: Text(
-                'Payment',
+                AppLocalizations.of(context)!.translate('Payment')!,
                 style: GoogleFonts.aclonica(
                     textStyle: TextStyle(
                         fontSize: 24,
@@ -71,7 +73,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Center(
                   child: Text(
-                    'Deposite',
+                    AppLocalizations.of(context)!.translate('Deposite')!,
                     style: GoogleFonts.aclonica(
                         textStyle: TextStyle(
                             fontSize: 24,
@@ -111,7 +113,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Center(
                   child: Text(
-                    'Withdraw',
+                    AppLocalizations.of(context)!.translate('Withdraw')!,
                     style: GoogleFonts.aclonica(
                         textStyle: TextStyle(
                             fontSize: 24,

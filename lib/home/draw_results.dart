@@ -4,6 +4,7 @@ import 'package:thai_lottery/utility/app_bar.dart';
 import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/image.dart';
 
+import '../local/app_localizations.dart';
 import '../model/all_lottery_model.dart';
 import '../utility/network_http.dart';
 import '../utility/progressdialog_custom.dart';
@@ -34,14 +35,6 @@ class _DrawResuitsState extends State<DrawResuits> {
     setState(() {});
   }
 
-  List<String> name = [
-    "Yash 1",
-    "Yash 2",
-    "Yash 3",
-    "4",
-    "5",
-    "6",
-  ];
 
 
   @override
@@ -62,7 +55,7 @@ class _DrawResuitsState extends State<DrawResuits> {
               ),
               Center(
                 child: Text(
-                  'DRAW RESULTS',
+                  AppLocalizations.of(context)!.translate('DRAW RESULTS')!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontSize: 24,
@@ -93,8 +86,8 @@ class _DrawResuitsState extends State<DrawResuits> {
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   children: [
-                    const Text(
-                      "MAIN DRAW",
+                     Text(
+                    AppLocalizations.of(context)!.translate("MAIN DRAW")!,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -255,8 +248,8 @@ class _DrawResuitsState extends State<DrawResuits> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "TOTAL WINNERS:",
+                     Text(
+                       AppLocalizations.of(context)!.translate( "TOTAL WINNERS:")!,
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -284,8 +277,8 @@ class _DrawResuitsState extends State<DrawResuits> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "TOTAL PRIZES:",
+                     Text(
+                       AppLocalizations.of(context)!.translate("TOTAL PRIZES:")!,
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -316,7 +309,7 @@ class _DrawResuitsState extends State<DrawResuits> {
               const SizedBox(
                 height: 30,
               ),
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -327,7 +320,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                         color: primarycolor_cust),
                   ),
                   Text(
-                    "THAI LOTTERY",
+                    AppLocalizations.of(context)!.translate("THAI LOTTERY")!,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,

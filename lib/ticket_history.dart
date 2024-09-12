@@ -7,6 +7,7 @@ import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/progressdialog_custom.dart';
 
+import 'local/app_localizations.dart';
 import 'model/all_ticket_model.dart';
 
 class TicketScreen extends StatefulWidget {
@@ -51,7 +52,7 @@ class _TicketScreenState extends State<TicketScreen> {
           ),
           Center(
             child: Text(
-              'Tickets History',
+              AppLocalizations.of(context)!.translate('Tickets History')!,
               style: GoogleFonts.aclonica(
                   textStyle: const TextStyle(
                       fontSize: 24,
@@ -81,8 +82,8 @@ class _TicketScreenState extends State<TicketScreen> {
                   header: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Ticket No.",
+                       Text(
+                      AppLocalizations.of(context)!.translate("Ticket No.")!,
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

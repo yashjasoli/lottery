@@ -7,6 +7,8 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
 
+import '../local/app_localizations.dart';
+
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
 
@@ -25,7 +27,7 @@ class _MyAccountState extends State<MyAccount> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 50,),
-            Text('My Account',style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
+            Text(AppLocalizations.of(context)!.translate('My Account')!,style: GoogleFonts.aclonica(textStyle: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: textcolor_cust2)),),
             SizedBox(height: 30,),
             GestureDetector(
               onTap: (){
@@ -40,7 +42,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
                 child: ListTile(
                   leading: Image.asset(ic_percnalInfo,scale: 4,),
-                  title: Text("Personal Information",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: textcolor_cust2),),
+                  title: Text(AppLocalizations.of(context)!.translate("Personal Information")!,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: textcolor_cust2),),
                 ),
               ),
             ),
@@ -58,7 +60,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
                 child: ListTile(
                   leading: Icon(Icons.lock_outline_rounded,color: primarycolor_cust,),
-                  title: Text("Security Setting",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: textcolor_cust2),),
+                  title: Text(AppLocalizations.of(context)!.translate("Security Setting")!,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: textcolor_cust2),),
                 ),
               ),
             )

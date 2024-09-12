@@ -7,6 +7,7 @@ import 'package:thai_lottery/utility/dwers.dart';
 import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 
+import '../local/app_localizations.dart';
 import '../utility/requad_box.dart';
 
 class DepositeScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
               ),
               Center(
                 child: Text(
-                  'Deposite',
+                  AppLocalizations.of(context)!.translate('Deposite')!,
                   style: GoogleFonts.aclonica(
                       textStyle: TextStyle(
                           fontSize: 24,
@@ -63,7 +64,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: "Enter UTR Number",
+                      hintText: AppLocalizations.of(context)!.translate("Enter UTR Number"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -83,7 +84,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: "Enter Deposite Amount",
+                      hintText: AppLocalizations.of(context)!.translate("Enter Deposite Amount"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -186,7 +187,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "DEPOSITE NOW",
+                      AppLocalizations.of(context)!.translate( "DEPOSITE NOW")!,
                       style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 18),
                     ),
                   ),

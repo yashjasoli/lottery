@@ -8,6 +8,7 @@ import 'package:thai_lottery/utility/colors.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/no_data.dart';
 
+import '../local/app_localizations.dart';
 import '../main.dart';
 import '../model/lottery_details_model.dart';
 import '../model/ticket_number_model.dart';
@@ -44,7 +45,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
   userData()async{
     Map<String, dynamic> ref = await networkHtttp.userData();
     usarDataModel = UsarDataModel.fromJson(ref);
-    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THR");
+    pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THB");
     pref.setString(
         "balance", usarDataModel.data!.balance.toString());
     currncy = await pref.getString("country", "");
@@ -128,9 +129,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                     color: primarycolor_cust,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
-                      "Okay",
+                      AppLocalizations.of(context)!.translate("Okay")!,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -203,7 +204,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               children: [
                 _buildCircleLine(),
                 Text(
-                  "  THAI LOTTERY  ",
+                  AppLocalizations.of(context)!.translate("  THAI LOTTERY  ")!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
@@ -244,7 +245,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                 ),
                 Column(
                   children: [
-                    Text("GUARANTEED WINNERS",
+                    Text(AppLocalizations.of(context)!.translate("GUARANTEED WINNERS")!,
                         style: _whiteText(10, fontWeight: FontWeight.w600)),
                     Text("3000", style: _whiteText(20)),
                   ],
@@ -273,7 +274,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       child: Column(
         children: [
           Text(
-            "NEXT DRAW",
+          AppLocalizations.of(context)!.translate("NEXT DRAW")!,
             style: GoogleFonts.aclonica(
               textStyle: const TextStyle(
                   color: Colors.white,
@@ -290,7 +291,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildCountdown("$days", "DAYS"),
+              _buildCountdown("$days", AppLocalizations.of(context)!.translate("DAYS")!),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30),
                 child: Text(
@@ -301,7 +302,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                       fontWeight: FontWeight.w800),
                 ),
               ),
-              _buildCountdown("$hours", "HOURS"),
+              _buildCountdown("$hours", AppLocalizations.of(context)!.translate("HOURS")!),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30),
                 child: Text(
@@ -312,7 +313,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                       fontWeight: FontWeight.w800),
                 ),
               ),
-              _buildCountdown("$minutes", "MINUTES"),
+              _buildCountdown("$minutes", AppLocalizations.of(context)!.translate("MINUTES")!),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30),
                 child: Text(
@@ -323,7 +324,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                       fontWeight: FontWeight.w800),
                 ),
               ),
-              _buildCountdown("$seconds", "SECONDS"),
+              _buildCountdown("$seconds", AppLocalizations.of(context)!.translate("SECONDS")!),
             ],
           ),
         ],
@@ -368,8 +369,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       onTap: isbuy != false
           ? null
           : () async {
-        for (var i = 0; i < tickets.length; i++) {
-          if (tickets[i] != "") {
+
             try {
               var response = await networkHtttp.buyLottery(widget.id, tickets);
               print("Response from buyLottery: $response");
@@ -388,18 +388,6 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               }
             } catch (e) {
               print("Error: $e");
-            }
-          } else {
-            var snackBar = SnackBar(
-              content: Text("Generate ticket number ${i + 1}"),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: primarycolor_cust,
-              hitTestBehavior: HitTestBehavior.opaque,
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            print("Ticket at index $i generated: ${tickets[i]}");
-            setState(() {});
-          }
         }
       },
 
@@ -413,9 +401,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               : Colors.green, // Full color when tickets is not empty.
           borderRadius: BorderRadius.circular(10),
         ),
-        child: const Center(
+        child:  Center(
           child: Text(
-            "Buy Now", // Correct conditional text display.
+    AppLocalizations.of(context)!.translate("Buy Now")!, // Correct conditional text display.
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
           ),
@@ -515,7 +503,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             padding: const EdgeInsets.all(12),
             child: Column(
               children: [
-                const Text("Your Ticket Number",
+                 Text(AppLocalizations.of(context)!.translate("Your Ticket Number")!,
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -564,9 +552,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                     decoration: BoxDecoration(
                         color: primarycolor_cust,
                         borderRadius: BorderRadius.circular(10)),
-                    child: const Center(
+                    child:  Center(
                       child: Text(
-                        "GENERATE",
+                        AppLocalizations.of(context)!.translate("GENERATE")!,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -600,9 +588,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           color: Colors.green, // Choose any color for the "Add Ticket" button.
           borderRadius: BorderRadius.circular(10),
         ),
-        child: const Center(
+        child:  Center(
           child: Text(
-            "ADD TICKET",
+    AppLocalizations.of(context)!.translate("ADD TICKET")!,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -665,8 +653,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               Lottie.network(
                   "https://lottie.host/d4c8c6b9-20c7-4727-9557-095cbe00baee/7yFUw1WtVB.json",
                   height: 200),
-              const Text(
-                "Success",
+               Text(
+                 AppLocalizations.of(context)!.translate("Success")!,
                 style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.w500,
@@ -675,8 +663,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                "You have successfully purchased Tickets",
+               Text(
+                 AppLocalizations.of(context)!.translate("You have successfully purchased Tickets")!,
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
@@ -696,9 +684,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                     color: primarycolor_cust,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
-                      "Okay",
+                      AppLocalizations.of(context)!.translate("Okay")!,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -741,8 +729,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                "Purchasing failed please deposit money",
+               Text(
+                 AppLocalizations.of(context)!.translate( "Purchasing failed please deposit money")!,
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
@@ -762,9 +750,9 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                     color: primarycolor_cust,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
-                      "Go To Deposit",
+                      AppLocalizations.of(context)!.translate("Go To Deposit")!,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
