@@ -235,7 +235,7 @@ class _drowerState extends State<drower> {
                   ),
                 ),
                 title:  Text(
-                  AppLocalizations.of(context)!.translate('CURRNCY: THB & INR')!,
+                  AppLocalizations.of(context)!.translate('CURRENCY: THB & INR')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

@@ -67,7 +67,7 @@ class _DrawResuitsState extends State<DrawResuits> {
                 height: 10,
               ),
               const Text(
-                "Feiday, 5 July 2024",
+                "Friday, 5 July 2024",
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

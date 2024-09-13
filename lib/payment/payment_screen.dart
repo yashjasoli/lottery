@@ -73,7 +73,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Center(
                   child: Text(
-                    AppLocalizations.of(context)!.translate('Deposite')!,
+                    AppLocalizations.of(context)!.translate('Deposit')!,
                     style: GoogleFonts.aclonica(
                         textStyle: TextStyle(
                             fontSize: 24,
@@ -113,7 +113,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Center(
                   child: Text(
-                    AppLocalizations.of(context)!.translate('Withdraw')!,
+                    AppLocalizations.of(context)!.translate('Withdrawl')!,
                     style: GoogleFonts.aclonica(
                         textStyle: TextStyle(
                             fontSize: 24,

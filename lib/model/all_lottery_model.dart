@@ -57,16 +57,31 @@ class Data {
     totalDraw = json['totalDraw'];
     repeatDraw = json['repeatDraw'];
     iV = json['__v'];
+
     lotteryDraw = json['lottery_draw'] != null
-        ? new LotteryDraw.fromJson(json['lottery_draw'])
+        ? LotteryDraw.fromJson(json['lottery_draw'])
         : null;
+
     if (json['winner'] != null) {
       winner = <Winner>[];
-      json['winner'].forEach((v) {
-        winner!.add(new Winner.fromJson(v));
-      });
+      // Check if json['winner'] is a List
+      if (json['winner'] is List) {
+        // Use the correct type for each item in the List
+        (json['winner'] as List<dynamic>).forEach((item) {
+          if (item is Map<String, dynamic>) {
+            winner!.add(Winner.fromJson(item));
+          } else {
+            // Handle unexpected item type
+            print('Unexpected item type in winner list');
+          }
+        });
+      } else {
+        print('Unexpected type for winner field');
+      }
     }
   }
+
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

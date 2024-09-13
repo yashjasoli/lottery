@@ -40,7 +40,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               ),
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Withdraw')!,
+                  AppLocalizations.of(context)!.translate('Withdrawl')!,
                   style: GoogleFonts.aclonica(
                       textStyle: TextStyle(
                           fontSize: 24,

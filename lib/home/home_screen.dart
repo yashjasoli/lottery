@@ -95,9 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final pages = [
-    benarImage,
-    benarImage,
-    benarImage,
+    benarImage1,
+    benarImage2,
+    benarImage3,
   ];
 
   @override
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 12,
                 ),
                 SizedBox(
-                //  height: 210,
+                  height: MediaQuery.of(context).size.height * 0.28,
                   // width: 500,
                   child: ListView.builder(
                       itemCount: allLottery.data!.length,
@@ -904,7 +904,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Deposite')!,
+                  AppLocalizations.of(context)!.translate('Deposit')!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontSize: 24,
@@ -946,7 +946,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Withdraw')!,
+                  AppLocalizations.of(context)!.translate('Withdrawl')!,
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontSize: 24,
@@ -1051,7 +1051,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "50Lakh $currncy",
+                                "5 million $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1073,7 +1073,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "20Lakh $currncy",
+                                "2 million $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1095,7 +1095,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "10Lakh $currncy",
+                                "1 million $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1117,7 +1117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "1Lakh $currncy",
+                                "100,000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1139,7 +1139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "80K $currncy",
+                                "80,000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1161,7 +1161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "40K $currncy",
+                                "40,000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1183,7 +1183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "20K $currncy",
+                                "20,000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1205,7 +1205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "10K $currncy",
+                                "10,000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1227,7 +1227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "5K $currncy",
+                                "5000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -1249,7 +1249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 12),
                               ),
                               Text(
-                                "1K $currncy",
+                                "1000 $currncy",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,

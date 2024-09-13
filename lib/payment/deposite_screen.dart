@@ -38,7 +38,7 @@ class _DepositeScreenState extends State<DepositeScreen> {
               ),
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Deposite')!,
+                  AppLocalizations.of(context)!.translate('Deposit')!,
                   style: GoogleFonts.aclonica(
                       textStyle: TextStyle(
                           fontSize: 24,
