@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +32,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   SessionManager pref = SessionManager();
   bool _isLoading = false;
   bool passwordVisible = false;
+  bool isvalid = false;
 
+  void Validate(String email) {
+     isvalid = EmailValidator.validate(email);
+    print(isvalid);
+  }
   @override
   Widget build(BuildContext context) {
     return _isLoading == true
@@ -167,12 +173,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: TextFormField(
                             keyboardType: TextInputType.number,
                             controller: phoneController,
+                            maxLength: 10,
                             style: const TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
+
                                 fontWeight: FontWeight.w400),
                             decoration:  InputDecoration(
                                 contentPadding: EdgeInsets.zero,
+                                counterText: "",
                                 hintText: AppLocalizations.of(context)!.translate("Enter Your Mobile Number")!,
                                 hintStyle: TextStyle(
                                     color: seconderycolor_cust,
@@ -199,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             fontWeight: FontWeight.w400),
                         decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText: AppLocalizations.of(context)!.translate("Enter Your Thai ID or Passport Number")!,
+                            hintText: AppLocalizations.of(context)!.translate("Enter Your Thai ID or Passport Number(optional)")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -224,7 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         decoration:  InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText:
-                            AppLocalizations.of(context)!.translate("Enter Your PromptPay Number or Gpay Number")!,
+                            AppLocalizations.of(context)!.translate("Enter Your PromptPay Number or Gpay Number(optional)")!,
                             hintStyle: TextStyle(
                                 color: seconderycolor_cust,
                                 fontSize: 12,
@@ -283,8 +292,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     GestureDetector(
                       onTap: () async {
-
-                        if (phoneController.text.isEmpty ||
+                        Validate(emailController.text);
+                        if(isvalid == false) {
+                          var snackBar = SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .translate("Please Enter Valid Email")!),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: primarycolor_cust,
+                            hitTestBehavior: HitTestBehavior.opaque,);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }else{
+                        if (emailController.text.isEmpty ||
                             passwordController.text.isEmpty ||
                             nameController.text.isEmpty ||
                             phoneController.text.isEmpty) {
@@ -338,6 +356,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               hitTestBehavior: HitTestBehavior.opaque,);
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
+                        }
                         }
                       },
                       child: Container(

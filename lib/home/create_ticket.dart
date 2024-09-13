@@ -237,7 +237,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("15,000,000", style: _whiteText(20)),
+                Text("THB 15000000", style: _whiteText(20)),
                 Container(
                   width: 2,
                   height: 40,

@@ -18,8 +18,8 @@
   "No account? Create Account": "Нет аккаунта? Создать аккаунт",
   "Enter Your Full Name": "Введите ваше полное имя",
   "Enter Your Mobile Number": "Введите ваш номер телефона",
-  "Enter Your Thai ID or Passport Number": "Введите ваш тайский ID или номер паспорта",
-  "Enter Your PromptPay Number or Gpay Number": "Введите ваш номер PromptPay или Gpay",
+  "Enter Your Thai ID or Passport Number(optional)": "Введите ваш тайский идентификационный номер или номер паспорта (необязательно)",
+  "Enter Your PromptPay Number or Gpay Number(optional)": "Введите ваш номер PromptPay или Gpay (необязательно)",
   "CREATE ACCOUNT": "СОЗДАТЬ АККАУНТ",
   "FAQs": "Часто задаваемые вопросы",
   "Privacy": "Конфиденциальность",
@@ -84,7 +84,7 @@
   "Tickets History": "История билетов",
   "About Us": "О нас",
   "LOG OUT": "Выйти",
-  "Please Waiting...": "Пожалуйста, подождите...",
+  "Please Wait": "Пожалуйста, подождите",
   "Please Enter Data": "Пожалуйста, введите данные",
   "Thai Lottery": "Тайская лотерея",
   "Ticket No.": "Номер билета",
@@ -103,5 +103,6 @@
     "CHINESE": "КИТАЙСКИЙ",
   "MAIN DRAW": "ОСНОВНОЙ РОЗЫГРЫШ",
     "TOTAL PRIZES:": "ОБЩЕЕ КОЛИЧЕСТВО ПРИЗОВ:",
-    "No.": "Нет."
+    "No.": "Нет.",
+  "Please Enter Valid Email": "Пожалуйста, введите действительный адрес электронной почты"
 }

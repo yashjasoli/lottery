@@ -18,8 +18,8 @@
   "No account? Create Account": "ยังไม่มีบัญชี? สร้างบัญชี",
   "Enter Your Full Name": "กรุณากรอกชื่อเต็มของคุณ",
   "Enter Your Mobile Number": "กรุณากรอกหมายเลขโทรศัพท์ของคุณ",
-  "Enter Your Thai ID or Passport Number": "กรุณากรอกหมายเลขบัตรประชาชนหรือหนังสือเดินทางของคุณ",
-  "Enter Your PromptPay Number or Gpay Number": "กรุณากรอกหมายเลขพร้อมเพย์หรือ Gpay ของคุณ",
+  "Enter Your Thai ID or Passport Number(optional)": "กรุณากรอกหมายเลขบัตรประชาชนไทยหรือหมายเลขพาสปอร์ตของคุณ(ไม่บังคับ)",
+  "Enter Your PromptPay Number or Gpay Number(optional)": "กรุณากรอกหมายเลข PromptPay หรือหมายเลข Gpay ของคุณ",
   "CREATE ACCOUNT": "สร้างบัญชี",
   "FAQs": "คำถามที่พบบ่อย",
   "Privacy": "นโยบายความเป็นส่วนตัว",
@@ -84,7 +84,7 @@
   "Tickets History": "ประวัติตั๋ว",
   "About Us": "เกี่ยวกับเรา",
   "LOG OUT": "ออกจากระบบ",
-  "Please Waiting...": "กรุณารอสักครู่...",
+  "Please Wait": "กรุณารอ",
   "Please Enter Data": "กรุณากรอกข้อมูล",
   "Thai Lottery": "ลอตเตอรีไทย",
   "Ticket No.": "หมายเลขตั๋ว",
@@ -103,5 +103,6 @@
     "CHINESE": "จีน",
   "MAIN DRAW": "การจับรางวัลหลัก",
     "TOTAL PRIZES:" : "รางวัลทั้งหมด:",
-    "No.": "ไม่."
+    "No.": "ไม่.",
+  "Please Enter Valid Email": "กรุณากรอกอีเมลที่ถูกต้อง"
 }

@@ -25,7 +25,7 @@ class progressdialog_custom extends StatefulWidget {
                   child: Lottie.network(
                       "https://lottie.host/9a708eae-f5b4-4bec-b20f-964fb913011a/8e86oYCOpN.json"),
                 ),
-                 Text(AppLocalizations.of(context)!.translate("Please Waiting...")!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),)
+                 Text(AppLocalizations.of(context)!.translate("Please Wait")!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),)
               ],
             ),
           ),

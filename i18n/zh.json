@@ -18,8 +18,8 @@
   "No account? Create Account": "没有账户？创建账户",
   "Enter Your Full Name": "请输入您的全名",
   "Enter Your Mobile Number": "请输入您的手机号码",
-  "Enter Your Thai ID or Passport Number": "请输入您的泰国身份证或护照号码",
-  "Enter Your PromptPay Number or Gpay Number": "请输入您的PromptPay或Gpay号码",
+  "Enter Your Thai ID or Passport Number(optional)": "请输入您的泰国身份证或护照号码（可选）",
+  "Enter Your PromptPay Number or Gpay Number(optional)": "请输入您的PromptPay号码或Gpay号码（可选）",
   "CREATE ACCOUNT": "创建账户",
   "FAQs": "常见问题",
   "Privacy": "隐私",
@@ -84,7 +84,7 @@
   "Tickets History": "票历史",
   "About Us": "关于我们",
   "LOG OUT": "登出",
-  "Please Waiting...": "请稍候...",
+  "Please Wait": "请稍候",
   "Please Enter Data": "请输入数据",
   "Thai Lottery": "泰国彩票",
   "Ticket No.": "票号",
@@ -103,5 +103,6 @@
     "CHINESE": "中文",
   "MAIN DRAW": "主要抽奖",
   "TOTAL PRIZES:" : "总奖品：",
-    "No.": "号码"
+    "No.": "号码",
+  "Please Enter Valid Email": "请输入有效电子邮箱"
 }

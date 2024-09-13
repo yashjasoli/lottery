@@ -18,8 +18,8 @@
     "No account? Create Account": "No account? Create Account",
     "Enter Your Full Name": "Enter Your Full Name",
     "Enter Your Mobile Number": "Enter Your Mobile Number",
-    "Enter Your Thai ID or Passport Number": "Enter Your Thai ID or Passport Number",
-    "Enter Your PromptPay Number or Gpay Number": "Enter Your PromptPay Number or Gpay Number",
+    "Enter Your Thai ID or Passport Number(optional)": "Enter Your Thai ID or Passport Number(optional)",
+    "Enter Your PromptPay Number or Gpay Number(optional)": "Enter Your PromptPay Number or Gpay Number(optional)",
     "CREATE ACCOUNT": "CREATE ACCOUNT",
     "FAQs": "FAQs",
     "Privacy": "Privacy",
@@ -84,7 +84,7 @@
     "Tickets History": "Tickets History",
     "About Us": "About Us",
     "LOG OUT": "LOG OUT",
-    "Please Waiting...": "Please Waiting...",
+    "Please Wait": "Please Wait",
     "Please Enter Data": "Please Enter Data",
     "Thai Lottery": "Thai Lottery",
     "Ticket No.": "Ticket No.",
@@ -103,6 +103,8 @@
     "CHINESE": "CHINESE",
     "MAIN DRAW": "MAIN DRAW",
     "TOTAL PRIZES:" : "TOTAL PRIZES:",
-    "No.": "No."
+    "No.": "No.",
+    "Please Enter Valid Email": "Please Enter Valid Email"
+
 
 }
