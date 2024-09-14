@@ -12,6 +12,7 @@ import 'package:thai_lottery/utility/image.dart';
 import 'package:thai_lottery/utility/network_http.dart';
 import 'package:thai_lottery/utility/shared_preferences.dart';
 
+import '../faq/about_us.dart';
 import '../local/app_langugage_provider.dart';
 import '../local/app_localizations.dart';
 
@@ -289,7 +290,10 @@ class _drowerState extends State<drower> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const AboutUs()));
+                },
               ),
             ],
           ),

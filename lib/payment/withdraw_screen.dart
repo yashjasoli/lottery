@@ -61,7 +61,8 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   controller: UTRController,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: AppLocalizations.of(context)!.translate("Enter Your PromptPay / UPI ID"),
+                      hintText: AppLocalizations.of(context)!
+                          .translate("Enter Your PromptPay / UPI ID"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -83,7 +84,8 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      hintText: AppLocalizations.of(context)!.translate("Enter Amount"),
+                      hintText: AppLocalizations.of(context)!
+                          .translate("Enter Amount"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -201,9 +203,14 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
             alert_success().alertSuccess(context);
           } else if (double.parse(balance) <
               double.parse(amountController.text)) {
-            print(AppLocalizations.of(context)!.translate("Please velid amount"));
-            ScaffoldMessenger.of(context).showSnackBar(
-                 SnackBar(content: Text(AppLocalizations.of(context)!.translate("Please Enter valid amount")!)));
+            print(
+                AppLocalizations.of(context)!.translate("Please velid amount"));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: primarycolor_cust,
+                hitTestBehavior: HitTestBehavior.opaque,
+                content: Text(AppLocalizations.of(context)!
+                    .translate("Please Enter valid amount")!)));
           } else {
             await networkHtttp.withdraw(
                 amountController.text, UTRController.text);
@@ -221,7 +228,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: Text(
-    AppLocalizations.of(context)!.translate( "Withdraw NOW")!,
+              AppLocalizations.of(context)!.translate("Withdraw NOW")!,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

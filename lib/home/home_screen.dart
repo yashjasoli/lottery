@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Image.asset(

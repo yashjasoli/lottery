@@ -80,7 +80,7 @@
     "Please Enter valid amount": "Please Enter valid amount",
     "Withdraw NOW": "Withdraw NOW",
     "Withdraw History": "Withdraw History",
-    "CURRENCY: THB & INR": "CURRNCY: THB & INR",
+    "CURRENCY: THB & INR": "CURRENCY: THB & INR",
     "Tickets History": "Tickets History",
     "About Us": "About Us",
     "LOG OUT": "LOG OUT",
@@ -104,7 +104,18 @@
     "MAIN DRAW": "MAIN DRAW",
     "TOTAL PRIZES:" : "TOTAL PRIZES:",
     "No.": "No.",
-    "Please Enter Valid Email": "Please Enter Valid Email"
-
+    "Please Enter Valid Email": "Please Enter Valid Email",
+    "Our Thai Lottery app is built using cutting-edge technology to ensure a smooth and secure user experience. We use advanced encryption to protect user data and secure transactions, while the app's design ensures fast performance and seamless ticket purchasing and payment processes." : "Our Thai Lottery app is built using cutting-edge technology to ensure a smooth and secure user experience. We use advanced encryption to protect user data and secure transactions, while the app's design ensures fast performance and seamless ticket purchasing and payment processes.",
+"Technology": "Technology",
+    "Payment Method": "Payment Method",
+    "The app offers a secure payment option through a scanner system. After selecting your lottery tickets, a QR code will be generated, which can be scanned using a mobile banking or e-wallet app for instant payment. This ensures a seamless and hassle-free experience." : "The app offers a secure payment option through a scanner system. After selecting your lottery tickets, a QR code will be generated, which can be scanned using a mobile banking or e-wallet app for instant payment. This ensures a seamless and hassle-free experience.",
+"Draw": "Draw",
+    "The Thai lottery draw follows a transparent and random process to ensure fairness. Draws are conducted on specific dates set by the Thai government, and the results are announced live. The app provides real-time updates, allowing you to view the winning numbers as soon as they are announced.": "The Thai lottery draw follows a transparent and random process to ensure fairness. Draws are conducted on specific dates set by the Thai government, and the results are announced live. The app provides real-time updates, allowing you to view the winning numbers as soon as they are announced.",
+    "Winners": "Winners",
+    " Winners are selected based on a random draw conducted by the official Thai Lottery authorities. The draw process is transparent and unbiased, ensuring that everyone has an equal chance to win. The winning numbers are published immediately after the draw and are accessible through our app." : " Winners are selected based on a random draw conducted by the official Thai Lottery authorities. The draw process is transparent and unbiased, ensuring that everyone has an equal chance to win. The winning numbers are published immediately after the draw and are accessible through our app.",
+    "Thai Lottery was established in Thailand and evolved into a global gaming operator, offering entertainment and innovative gaming platforms and products with a CSR-first approach to supporting individuals and society. Rooted in values aimed at a more sustainable future and grounded in principles of social and environmental responsibility, Emirates Draw positively impacts and brings real change to its fortunate winners, one life at a time. The company is dedicated to giving back to the community through its leading Coral Reef Restoration Programme and pro-societal and environment-driven initiatives. It features four fast- growing games Thai Lottery delivering thousands of dirhams daily and millions weekly. Our role is to make a resonant impact and inspire people and organisations to collaborate towards building a better tomorrow.": "Thai Lottery was established in Thailand and evolved into a global gaming operator, offering entertainment and innovative gaming platforms and products with a CSR-first approach to supporting individuals and society. Rooted in values aimed at a more sustainable future and grounded in principles of social and environmental responsibility, Thai Lottery positively impacts and brings real change to its fortunate winners, one life at a time. The company is dedicated to giving back to the community through its leading Coral Reef Restoration Programme and pro-societal and environment-driven initiatives. It features four fast- growing games Thai Lottery delivering thousands of dirhams daily and millions weekly. Our role is to make a resonant impact and inspire people and organisations to collaborate towards building a better tomorrow.",
+    "Our Mission": "Our Mission",
+    "We believe in making a difference by transforming lives through our games and prizes, nurturing a positive workplace culture, and contributing to a healthier society, sustainable future, and a better world through our Coral Reef Restoration Programme.": "We believe in making a difference by transforming lives through our games and prizes, nurturing a positive workplace culture, and contributing to a healthier society, sustainable future, and a better world through our Coral Reef Restoration Programme.",
+    "Your information has been updated successfully": "Your information has been updated successfully"
 
 }
