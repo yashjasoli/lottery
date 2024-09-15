@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 12,
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.28,
+                  height: 215,
                   // width: 500,
                   child: ListView.builder(
                       itemCount: allLottery.data!.length,
@@ -388,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 20,
                                 ),
                                  Text(
-                                  "$currncy 15,000,000",
+                                  "$currncy 15000000",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -526,7 +526,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                          Center(
                           child: Text(
-                            "Feiday, 5 July 2024",
+                            "Friday, 5 July 2024",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400,

@@ -73,8 +73,8 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           remainingTime = nextDrawDate.difference(DateTime.now());
 
           if (remainingTime.isNegative) {
-            timer.cancel();
-            showTimeCompletedDialog(); // Show dialog when time is complete
+          //  timer.cancel();
+          //  showTimeCompletedDialog(); // Show dialog when time is complete
           }
         });
       });

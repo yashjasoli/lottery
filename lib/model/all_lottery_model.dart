@@ -203,6 +203,7 @@ class UserId {
   dynamic language;
   dynamic currencyCode;
   dynamic createdAt;
+  dynamic prince;
   dynamic iV;
 
   UserId(
@@ -217,6 +218,7 @@ class UserId {
         this.language,
         this.currencyCode,
         this.createdAt,
+        this.prince,
         this.iV});
 
   UserId.fromJson(Map<String, dynamic> json) {
@@ -231,6 +233,7 @@ class UserId {
     language = json['language'];
     currencyCode = json['currency_code'];
     createdAt = json['createdAt'];
+    prince = json['price'];
     iV = json['__v'];
   }
 
@@ -247,6 +250,7 @@ class UserId {
     data['language'] = this.language;
     data['currency_code'] = this.currencyCode;
     data['createdAt'] = this.createdAt;
+    data['price'] = this.prince;
     data['__v'] = this.iV;
     return data;
   }
