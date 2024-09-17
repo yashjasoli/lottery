@@ -12,7 +12,7 @@ String email = '';
 String balance = '';
 String phoneNumber = '';
 String token = '';
-String currncy = '';
+//String currncy = '';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

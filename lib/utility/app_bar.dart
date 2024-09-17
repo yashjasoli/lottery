@@ -54,7 +54,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Text(
-                "$currncy $balance",
+                "THB $balance",
                 style: TextStyle(
                   color: textcolor_cust,
                   fontWeight: FontWeight.w600,

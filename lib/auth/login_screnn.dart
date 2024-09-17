@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               phoneController.text, passwordController.text);
                           loginModel = LoginModel.fromJson(data);
                           if (loginModel.status == true) {
-                            currncy = loginModel.data!.currencyCode.toString();
+                          //  currncy = loginModel.data!.currencyCode.toString();
                             print("login");
                             pref.setString(
                                 "username", loginModel.data!.name.toString());
@@ -229,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             balance = await pref.getString("balance", "");
                             email = await pref.getString("email", "");
                             token = await pref.getString("token", "");
-                            currncy = await pref.getString("country", "");
+                          //  currncy = await pref.getString("country", "");
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomeScreen()));

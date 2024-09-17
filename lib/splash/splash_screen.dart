@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     balance = await pref.getString("balance", "");
     email = await pref.getString("email", "");
     token = await pref.getString("token", "");
-    currncy = await pref.getString("currency", "");
+   // currncy = await pref.getString("currency", "");
     setState(() {});
   }
 

@@ -48,7 +48,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
     pref.setString("country", usarDataModel.data!.currencyCode.toString()  != "764" ? "INR" : "THB");
     pref.setString(
         "balance", usarDataModel.data!.balance.toString());
-    currncy = await pref.getString("country", "");
+   // currncy = await pref.getString("country", "");
     balance = await pref.getString("balance", "");
   }
   getData() async {
@@ -351,7 +351,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            "1 Draw With ${tickets.length} Tickets: ${tickets.length} x ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}\nTotal Amount: ${tickets.length * (currncy == "THB" ?  80 : 198.79)}",
+            "1 Draw With ${tickets.length} Tickets: ${tickets.length} x ${ "\$ 80"}\nTotal Amount: ${tickets.length * (80)}",
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
           ),
@@ -440,7 +440,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Text("Available Tickets: 55", style: TextStyle(color: Colors.white)),
-        Text("Price: ${currncy == "THB" ? "\$ 80" : "₹ 198.79"}  ",
+        Text("Price: ${"\$ 80"}  ",
             style: TextStyle(color: Colors.white)),
       ],
     );

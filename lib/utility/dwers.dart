@@ -225,7 +225,7 @@ class _drowerState extends State<drower> {
                   //  Navigator.pop(context);
                 },
               ),*/
-              ListTile(
+              /*ListTile(
                 leading: CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
@@ -247,7 +247,7 @@ class _drowerState extends State<drower> {
                   currency(context);
                   Scaffold.of(context).closeDrawer();
                 },
-              ),
+              ),*/
               ListTile(
                 leading: CircleAvatar(
                   radius: 18,
@@ -393,7 +393,7 @@ class _drowerState extends State<drower> {
                             "balance", monayModel.data!.balance.toString());
                         pref.setString("currency", "THB");
                         balance = monayModel.data!.balance.toString();
-                       currncy = 'THB';
+                       //currncy = 'THB';
                        Navigator.of(context).pop();
                       },
                       child: Container(
@@ -426,7 +426,7 @@ class _drowerState extends State<drower> {
                        "balance", monayModel.data!.balance.toString());
                     pref.setString("currency", "INR");
                     balance = monayModel.data!.balance.toString();
-                      currncy = "INR";
+                    //  currncy = "INR";
                         Navigator.pop(context);
 
                       },
