@@ -21,6 +21,21 @@ class _DrawResuitsState extends State<DrawResuits> {
   NetworkHttp networkHtttp = NetworkHttp();
   late AllLottery allLottery;
   bool _isLoading = true;
+  List<String> _list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1"];
+
+  List<String> prizes = [
+    "5 million THB", // Prize for rank 1
+    "2 million THB", // Prize for rank 2
+    "1 million THB", // Prize for rank 3
+    "100,000 THB",   // Prize for rank 4-10
+    "80,000 THB",    // Prize for rank 11-100
+    "40,000 THB",    // Prize for rank 101-500
+    "20,000 THB",    // Prize for rank 501-1000
+    "10,000 THB",    // Prize for rank 1001-1500
+    "5,000 THB",     // Prize for rank 1501-2000
+    "1,000 THB",     // Prize for rank 2001-2500
+    "500 THB"        // Prize for rank 2501-3000
+  ];
 
   @override
   void initState() {
@@ -31,10 +46,39 @@ class _DrawResuitsState extends State<DrawResuits> {
   getData() async {
     Map<String, dynamic> ref = await networkHtttp.allLottery();
     allLottery = AllLottery.fromJson(ref);
+    String ticketNumberString = allLottery.data![0].winner![0].ticketNumber.toString();
+    _list = ticketNumberString.split('');
     _isLoading = false;
     setState(() {});
   }
 
+  Widget drawNumberBox(String number) {
+    return Container(
+      height: 40,
+      width: 40,
+      padding: const EdgeInsets.only(bottom: 3, top: 3),
+      decoration: BoxDecoration(
+        color: Colors.indigo,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Center(
+          child: Text(
+            number,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
 
   @override
@@ -103,150 +147,18 @@ class _DrawResuitsState extends State<DrawResuits> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "33",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "20",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child:  Center(
-                                child: Text(
-                                  "72",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "87",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "39",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.only(bottom: 3, top: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "29",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
+                          if (_list.length >= 2)
+                            drawNumberBox(_list[0] + _list[1]),
+                          if (_list.length >= 4)
+                            drawNumberBox(_list[2] + _list[3]),
+                          if (_list.length >= 6)
+                            drawNumberBox(_list[4] + _list[5]),
+                          if (_list.length >= 8)
+                            drawNumberBox(_list[6] + _list[7]),
+                          if (_list.length >= 10)
+                            drawNumberBox(_list[8] + _list[9]),
+                          if (_list.length >= 12)
+                            drawNumberBox(_list[10] + _list[11]),// Fixed number as shown in your code
                         ],
                       ),
                       const SizedBox(
@@ -297,9 +209,9 @@ class _DrawResuitsState extends State<DrawResuits> {
                         decoration: BoxDecoration(
                             color: primarycolor_cust,
                             borderRadius: BorderRadius.circular(20)),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "amount 268,298",
+                            "amount ${allLottery.data![0].winner![0].lotteryPriceId!.price}",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -338,135 +250,123 @@ class _DrawResuitsState extends State<DrawResuits> {
                 const SizedBox(
                   height: 30,
                 ),
-                ListView.builder(
-                  itemCount: allLottery.data![0].winner!.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == 0) {
-                      // Custom layout for the first item (Row containing 3 Columns)
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+            ListView.builder(
+              itemCount: allLottery.data![0].winner!.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                if (index == 0) {
+                  // Layout for the top 3 winners
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // Column 1 (2nd place)
+                      Column(
                         children: [
-                          // Column 2 (index 0)
-                          Column(
-                            children: [
-                              Image.asset(
-                                ic_number_2,
-                                scale: 4.0,
-                              ),
-                              Text(
-                                allLottery.data![0].winner![1].userId!.name.toString(), // Corresponding name for index 0
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                               Text(
-                                allLottery.data![0].winner![1].userId!.prince.toString(), // Static score or make it dynamic
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
+                          Image.asset(ic_number_2, scale: 4.0),
+                          Text(
+                            allLottery.data![0].winner![1].userId!.name.toString(),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                          // Column 1 (index 1)
-                          Column(
-                            children: [
-                              Image.asset(
-                                ic_number_1,
-                                scale: 3.9,
-                              ),
-                              Text(
-                                allLottery.data![0].winner![0].userId!.name.toString(), // Corresponding name for index 1
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                               Text(
-                                allLottery.data![0].winner![0].userId!.prince.toString(), // Static score or make it dynamic
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          // Column 3 (index 2)
-                          Column(
-                            children: [
-                              Image.asset(
-                                ic_number_3,
-                                scale: 4.0,
-                              ),
-                              Text(
-                                allLottery.data![0].winner?[2].userId?.name.toString() ?? "", // Corresponding name for index 2
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                               Text(
-                                 allLottery.data![0].winner![1].userId!.prince.toString(), // Static score or make it dynamic
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            prizes[1], // Prize for the 2nd winner
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ],
-                      );
-                    } else if (index >= 3) {
-                      // Different layout for other items starting from index 3
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: toolbarcolor_lang,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        margin: const EdgeInsets.all(8),
-                        child: ListTile(
-                          onTap: () {},
-                          leading: CircleAvatar(
-                            backgroundColor: primarycolor_cust,
-                            child: Image.asset(
-                              ic_drinc,
-                              scale: 3,
-                            ),
-                          ),
-                          title: Text(
-                            allLottery.data![0].winner![index].userId!.name.toString(), // Display the name dynamically for other items
+                      ),
+                      // Column 2 (1st place)
+                      Column(
+                        children: [
+                          Image.asset(ic_number_1, scale: 3.9),
+                          Text(
+                            allLottery.data![0].winner![0].userId!.name.toString(),
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: primarycolor_cust,
                             ),
                           ),
-                          subtitle:  Text(
-                            allLottery.data![0].winner![1].userId!.email.toString(), // Adjust if necessary
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
+                          Text(
+                            prizes[0], // Prize for the 1st winner
+                            style: const TextStyle(
                               fontSize: 10,
-                              color: greycolor_cust,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          trailing:  Text(
-                            allLottery.data![0].winner![index].userId!.prince.toString(), // Static score or dynamic if needed
-                            style: TextStyle(
-                              fontSize: 8,
+                        ],
+                      ),
+                      // Column 3 (3rd place)
+                      Column(
+                        children: [
+                          Image.asset(ic_number_3, scale: 4.0),
+                          Text(
+                            allLottery.data![0].winner?[2].userId?.name.toString() ?? "",
+                            style: const TextStyle(
+                              fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: greycolor_cust,
                             ),
                           ),
+                          Text(
+                            prizes[2], // Prize for the 3rd winner
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                } else if (index >= 3) {
+                  // Layout for winners from index 3 onwards
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: toolbarcolor_lang,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      onTap: () {},
+                      leading: CircleAvatar(
+                        backgroundColor: primarycolor_cust,
+                        child: Image.asset(ic_drinc, scale: 3),
+                      ),
+                      title: Text(
+                        allLottery.data![0].winner![index].userId!.name.toString(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: primarycolor_cust,
                         ),
-                      );
-                    } else {
-                      return Container(); // Return an empty container for index 1 and 2 (or modify as needed)
-                    }
-                  },
-                ),
+                      ),
+                      subtitle: Text(
+                        allLottery.data![0].winner![index].userId!.email.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          color: greycolor_cust,
+                        ),
+                      ),
+                      trailing: Text(
+                        prizes[index], // Prize corresponding to the current winner
+                        style: const TextStyle(
+                          fontSize: 8,
+                          fontWeight: FontWeight.w500,
+                          color: greycolor_cust,
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(); // Return empty container for index 1 and 2
+                }
+              },
+            ),
                 SizedBox(
                   height: 20,
                 )

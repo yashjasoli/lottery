@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late UsarDataModel usarDataModel;
   String url = 'https://www.google.co.in/';
   bool _isLoading = true;
-
+  List<String> _list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1"];
 
   @override
   void initState() {
@@ -65,9 +65,42 @@ class _HomeScreenState extends State<HomeScreen> {
   getData() async {
     Map<String, dynamic> ref = await networkHtttp.allLottery();
     allLottery = AllLottery.fromJson(ref);
+    String ticketNumberString = allLottery.data![0].winner![0].ticketNumber.toString();
+    _list = ticketNumberString.split('');
     _isLoading = false;
     setState(() {});
   }
+
+
+  Widget drawNumberBox(String number) {
+    return Container(
+      height: 40,
+      width: 40,
+      padding: const EdgeInsets.only(bottom: 3, top: 3),
+      decoration: BoxDecoration(
+        color: Colors.indigo,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Center(
+          child: Text(
+            number,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
   userData()async{
     Map<String, dynamic> ref = await networkHtttp.userData();
     usarDataModel = UsarDataModel.fromJson(ref);
@@ -388,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 20,
                                 ),
                                  Text(
-                                  "THB 15000000",
+                                  "THB 5MB",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -418,8 +451,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Text(
                         AppLocalizations.of(context)!.translate("PRIZES")!,
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 15),
                                           ),
                                         ),
                                       ),
@@ -449,8 +482,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         AppLocalizations.of(context)!.translate("BUY NOW")!,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 15),
                                           ),
                                         ),
                                       ),
@@ -539,150 +572,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "33",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "14",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "26",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "38",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "01",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              padding: const EdgeInsets.only(bottom: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "29",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            if (_list.length >= 2)
+                              drawNumberBox(_list[0] + _list[1]),
+                            if (_list.length >= 4)
+                              drawNumberBox(_list[2] + _list[3]),
+                            if (_list.length >= 6)
+                              drawNumberBox(_list[4] + _list[5]),
+                            if (_list.length >= 8)
+                              drawNumberBox(_list[6] + _list[7]),
+                            if (_list.length >= 10)
+                              drawNumberBox(_list[8] + _list[9]),
+                            if (_list.length >= 12)
+                              drawNumberBox(_list[10] + _list[11]),// Fixed number as shown in your code
                           ],
                         ),
                         const SizedBox(

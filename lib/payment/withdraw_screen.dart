@@ -62,7 +62,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: AppLocalizations.of(context)!
-                          .translate("Enter Your PromptPay / Referral ID"),
+                          .translate("Enter Your PromptPay / UPI ID"),
                       hintStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
