@@ -55,8 +55,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset(ic_splash_logo),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Center(
+          child: Image.asset(ic_splash_logo,scale: 4,),
+        ),
       ),
     );
   }

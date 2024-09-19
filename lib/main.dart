@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:thai_lottery/local/app_langugage_provider.dart';
@@ -16,6 +17,7 @@ String token = '';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   AppLanguageProvider appLanguage = AppLanguageProvider();
   await appLanguage.fetchLocale();
   runApp(MyApp(

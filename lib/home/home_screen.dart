@@ -421,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 20,
                                 ),
                                  Text(
-                                  "THB 5MB",
+                                  "5 MB",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
