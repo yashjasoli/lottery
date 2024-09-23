@@ -65,8 +65,23 @@ class _HomeScreenState extends State<HomeScreen> {
   getData() async {
     Map<String, dynamic> ref = await networkHtttp.allLottery();
     allLottery = AllLottery.fromJson(ref);
-    String ticketNumberString = allLottery.data![0].winner![0].ticketNumber.toString();
-    _list = ticketNumberString.split('');
+
+// Safely check if data and winner exist and are not empty
+    if (allLottery.data != null && allLottery.data!.isNotEmpty) {
+      var firstData = allLottery.data![0];
+
+      if (firstData.winner != null && firstData.winner!.isNotEmpty) {
+        String ticketNumberString = firstData.winner![0].ticketNumber?.toString() ?? '';
+        _list = ticketNumberString.split('');
+      } else {
+        // Handle case where winner is null or empty
+        _list = [];
+      }
+    } else {
+      // Handle case where data is null or empty
+      _list = [];
+    }
+
     _isLoading = false;
     setState(() {});
   }
