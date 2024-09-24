@@ -1,5 +1,5 @@
 
-const String ic_logo = "assets/image/logo.png";
+const String ic_logo = "assets/image/app_icon.png";
 const String ic_ticket = "assets/image/ticket.png";
 const String ic_language = "assets/image/language.png";
 const String ic_splash_logo = "assets/image/logo_2.png";
@@ -30,3 +30,4 @@ const String benarImage1 = "assets/image/image1.png";
 const String benarImage2 = "assets/image/image2.png";
 const String benarImage3 = "assets/image/image3.png";
 const String backgrundImage = "assets/image/backgrund.png";
+const String app_icon = "assets/image/app_icon.png";

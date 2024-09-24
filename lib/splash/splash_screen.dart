@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Center(
-          child: Image.asset(ic_splash_logo,scale: 4,),
+          child: Image.asset(app_icon,),
         ),
       ),
     );
