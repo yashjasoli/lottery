@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   SessionManager pref = SessionManager();
   late AllLottery allLottery;
   late UsarDataModel usarDataModel;
-  String url = 'https://www.google.co.in/';
+  String url = 'https://thailottery.co.in/';
   bool _isLoading = true;
   List<String> _list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1"];
 

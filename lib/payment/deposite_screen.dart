@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thai_lottery/home/home_screen.dart';
@@ -50,7 +51,13 @@ class _DepositeScreenState extends State<DepositeScreen> {
                 height: 20,
               ),
               Center(
-                child: Image.asset(ic_qrCode,scale: 5,),
+                child: CachedNetworkImage(
+                  imageUrl: "https://thailottery.co.in/img/scanner.png",
+                  scale: 4,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
               SizedBox(height: 20,),
               Container(
