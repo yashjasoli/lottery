@@ -208,7 +208,7 @@ class _TicketGenerateScreenState extends State<TicketGenerateScreen> {
                   style: GoogleFonts.aclonica(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 24,
+                          fontSize: 18,
                           color: Colors.white)),
                 ),
                 Flexible(

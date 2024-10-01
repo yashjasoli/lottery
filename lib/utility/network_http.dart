@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:thai_lottery/main.dart';
 
 class NetworkHttp {
-  static String baseUrl = "https://thailottery.onrender.com/api/user/";
+  static String baseUrl = "https://thailottery.cloud/api/user/";
   var headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',
